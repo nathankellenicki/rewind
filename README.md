@@ -1,7 +1,7 @@
 Rewind
 =======
 
-Rewind - A personal timeline and distributed social network engine built in Javascript
+Rewind - A personal timeline and distributed social network engine built in Javascript/ES6.
 
 Usage
 -------

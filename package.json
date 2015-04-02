@@ -1,0 +1,29 @@
+{
+  "name": "Rewind",
+  "version": "0.0.1",
+  "author": "Nathan Kunicki <me@nathankunicki.com>",
+  "description": "A personal timeline and distributed social network engine built in Javascript/ES6.",
+  "scripts": {
+    "start": "node ./main.js",
+    "test": "istanbul cover _mocha test"
+  },
+  "dependencies": {
+    "body-parser": "1.10.x",
+    "express": "4.11.x",
+    "log-timestamp": "0.1.x",
+    "morgan": "1.5.x",
+    "mysql": "2.6.x",
+    "sequelize": "2.0.x"
+  },
+  "devDependencies": {
+    "mocha": "2.2.x",
+    "chai": "2.2.x",
+    "sinon": "1.14.x",
+    "istanbul": "0.3.x",
+    "jslint": "0.8.x",
+    "sqlite3": "3.0.x"
+  },
+  "engines": {
+    "iojs": ">=1.6.3"
+  }
+}
