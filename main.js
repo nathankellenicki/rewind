@@ -17,10 +17,11 @@ var app = express(),
     accessLogStream = fs.createWriteStream(__dirname + "/access.log", {flags: "a"});
 
 app.use(morgan("combined", {stream: accessLogStream}));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 // Setup routes
-app.use("/updates", require("./src/routes/updates.js"));
+app.use("/", express.static("static")); // Static files
+app.use("/api/updates", require("./src/routes/updates.js")); // My updates
 
 // Start listening
 var server = app.listen(port);
