@@ -10,4 +10,4 @@ Install io.js v.1.6.3 or above (Rewind uses native ES6 features like Promises, s
 
 1. npm install
 2. npm start
-3. Open a browser and navigate to http://localhost:8000/
+3. Open a browser and navigate to http://localhost:8080/
