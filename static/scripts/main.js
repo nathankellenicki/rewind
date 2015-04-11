@@ -1,10 +1,12 @@
+"use strict";
+
 var UpdatesBox = React.createClass({
 
     handleUpdateSubmit: function (text) {
 
         var updates = this.state.updates;
         var newUpdates = [{
-            timestamp: Math.floor(+(new Date()) / 1000),
+            timestamp: (new Date()).toISOString(),
             text: text
         }].concat(updates);
 
@@ -19,9 +21,6 @@ var UpdatesBox = React.createClass({
             data: {
                 text: text
             },
-            success: function (data) {
-                //this.setState({data: data});
-            }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
