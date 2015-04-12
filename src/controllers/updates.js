@@ -26,8 +26,8 @@ module.exports = function () {
                 UpdateModel.create({
                     text: text,
                     timestamp: new Date()
-                }).then(function (updates) {
-                    resolve(updates);
+                }).then(function () {
+                    resolve();
                 });
 
             });

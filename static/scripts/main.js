@@ -71,7 +71,7 @@ var UpdatesList = React.createClass({
 
         var updateNodes = this.props.data.map(function (update) {
             return (
-                <Update timestamp={update.timestamp}>{update.text}</Update>
+                <Update key={update.id} timestamp={update.timestamp}>{update.text}</Update>
             );
         });
 
