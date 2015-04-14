@@ -8,7 +8,7 @@ module.exports = function () {
 
     return {
 
-        getRecentUpdates: function (startPoint) {
+        getRecentUpdates: function (startPoint = 0) {
             return new Promise(function (resolve, reject) {
 
                 UpdateModel.findAll({

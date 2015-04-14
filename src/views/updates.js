@@ -5,15 +5,11 @@ module.exports = function (data) {
 
     var base = JSON.parse(http200View());
 
-    base["updates"] = [];
-
-    data.updates.forEach(function (update) {
-        base["updates"].push({
-            "id": update.id,
-            "text": update.text,
-            "timestamp": update.timestamp
-        });
-    })
+    base.updates = data.updates.map(update => ({
+        "id": update.id,
+        "text": update.text,
+        "timestamp": update.timestamp
+    }));
 
     return JSON.stringify(base);
 
