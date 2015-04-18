@@ -16,11 +16,11 @@ var app = express(),
     accessLogStream = fs.createWriteStream(__dirname + "/../access.log", {flags: "a"});
 
 app.use(morgan("combined", {stream: accessLogStream}));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // Setup routes
-app.use("/", express.static("static")); // Static files
 app.use("/api/updates", require("./routes/updates.js")); // My updates
+app.use("/", express.static("static")); // Static files
 
 // Export interface
 module.exports = app;

@@ -8,7 +8,7 @@ var UpdatesController = require("../controllers/updates"),
     updatesController = new UpdatesController();
 
 // Load views
-var http200View = require("../views/http_200"),
+var updateView = require("../views/update"),
     updatesView = require("../views/updates");
 
 // Setup routes
@@ -38,9 +38,11 @@ router.post("/", function (req, res, next) {
 
     var text = req.body["text"];
 
-    updatesController.createUpdate(text).then(function () {
+    updatesController.createUpdate(text).then(function (update) {
 
-        res.status(200).contentType("application/json").send(http200View());
+        res.status(200).contentType("application/json").send(updateView({
+            update: update
+        }));
         return next;
 
     }).catch(function (err) {

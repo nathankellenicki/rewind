@@ -21,13 +21,16 @@ module.exports = function () {
         },
 
         createUpdate: function (text) {
+
             return new Promise(function (resolve, reject) {
 
-                UpdateModel.create({
+                var update = {
                     text: text,
                     timestamp: new Date()
-                }).then(function () {
-                    resolve();
+                };
+
+                UpdateModel.create(update).then(function (result) {
+                    resolve(result);
                 });
 
             });
@@ -35,4 +38,4 @@ module.exports = function () {
 
     };
 
-}
+};
