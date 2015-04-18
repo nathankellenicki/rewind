@@ -4,8 +4,12 @@
 var express = require("express");
 
 // Load controllers
-var UpdatesController = require("../controllers/updates.js"),
+var UpdatesController = require("../controllers/updates"),
     updatesController = new UpdatesController();
+
+// Load views
+var updateView = require("../views/update"),
+    updatesView = require("../views/updates");
 
 // Setup routes
 var router = module.exports = express.Router();
@@ -15,14 +19,17 @@ router.get("/", function (req, res, next) {
     var startPoint = 0;
 
     updatesController.getRecentUpdates(startPoint).then(function (updates) {
-        res.status(200).send({
-            status: 200,
+
+        res.status(200).contentType("application/json").send(updatesView({
             updates: updates
-        });
+        }));
         return next;
+
     }).catch(function (err) {
+
         res.status(500).send(err);
         return next;
+
     });
 
 });
@@ -31,16 +38,18 @@ router.post("/", function (req, res, next) {
 
     var text = req.body["text"];
 
-    updatesController.createUpdate(text).then(function () {
-        res.status(200).send({
-            status: 200
-        });
+    updatesController.createUpdate(text).then(function (update) {
+
+        res.status(200).contentType("application/json").send(updateView({
+            update: update
+        }));
         return next;
+
     }).catch(function (err) {
+
         res.status(500).send(err);
         return next;
+
     });
 
-    res.status(200).send({});
-    return next;
 });

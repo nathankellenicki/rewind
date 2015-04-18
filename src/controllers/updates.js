@@ -8,7 +8,7 @@ module.exports = function () {
 
     return {
 
-        getRecentUpdates: function (startPoint) {
+        getRecentUpdates: function (startPoint = 0) {
             return new Promise(function (resolve, reject) {
 
                 UpdateModel.findAll({
@@ -21,13 +21,16 @@ module.exports = function () {
         },
 
         createUpdate: function (text) {
+
             return new Promise(function (resolve, reject) {
 
-                UpdateModel.create({
+                var update = {
                     text: text,
                     timestamp: new Date()
-                }).then(function (updates) {
-                    resolve(updates);
+                };
+
+                UpdateModel.create(update).then(function (result) {
+                    resolve(result);
                 });
 
             });
@@ -35,4 +38,4 @@ module.exports = function () {
 
     };
 
-}
+};
