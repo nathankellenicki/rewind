@@ -8,6 +8,16 @@ Rewind.Views = Rewind.Views || {};
 
     Rewind.Views.Update = React.createClass({
 
+        componentWillEnter: function (callback) {
+
+            var $el = $(this.getDOMNode());
+
+            $el.fadeIn(800, function () {
+                callback();
+            });
+
+        },
+
         componentDidMount: function () {
 
             var ref = this;
@@ -25,7 +35,7 @@ Rewind.Views = Rewind.Views || {};
 
         render: function () {
             return (
-                <li className="update_box">
+                <li className="update_box" style={{display: "none"}}>
                     <div className="update">
                         <span className="content">{this.props.children}</span>
                     </div>

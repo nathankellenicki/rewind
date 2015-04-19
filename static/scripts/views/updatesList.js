@@ -18,7 +18,7 @@ Rewind.Views = Rewind.Views || {};
 
     };
 
-    var UpdatesTransitionGroup = React.addons.CSSTransitionGroup;
+    var ULContainerTransitionGroup = React.addons.TransitionGroup;
 
     Rewind.Views.UpdatesList = React.createClass({
         render: function () {
@@ -35,11 +35,9 @@ Rewind.Views = Rewind.Views || {};
             }
 
             return (
-                <ul className="updates_list">
-                    <UpdatesTransitionGroup transitionName="update">
-                        {updateNodes}
-                    </UpdatesTransitionGroup>
-                </ul>
+                <ULContainerTransitionGroup component="ul" className="updates_list">
+                    {updateNodes}
+                </ULContainerTransitionGroup>
             );
 
         }

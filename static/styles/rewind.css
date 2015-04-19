@@ -133,15 +133,6 @@ ul.updates_list li.update_box {
     border-radius: 3px;
 }
 
-ul.updates_list li.update_box.update-enter {
-    opacity: 0.01;
-    transition: opacity .5s ease-in;
-}
-
-ul.updates_list li.update_box.update-enter.update-enter-active {
-    opacity: 1;
-}
-
 ul.updates_list li.update_box div.update {
     padding: 10px;
 }
