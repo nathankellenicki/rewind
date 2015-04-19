@@ -34,6 +34,22 @@ module.exports = function () {
                 });
 
             });
+        },
+
+        deleteUpdateBy: function (id) {
+
+            return new Promise(function (resolve, reject) {
+
+                UpdateModel.destroy({
+                    where: {
+                        "id": id
+                    }
+                }).then(function () {
+                    resolve();
+                });
+
+            });
+
         }
 
     };

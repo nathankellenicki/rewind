@@ -1,68 +1,80 @@
 var Rewind = Rewind || {};
 
+Rewind.Models = Rewind.Models || {};
+Rewind.Models.Update = require("../models/update");
+
+Rewind.Collections = Rewind.Collections || {};
+Rewind.Collections.Updates = require("../collections/updates");
+
 Rewind.Views = Rewind.Views || {};
+Rewind.Views.UpdateForm = require("../views/updateForm");
+Rewind.Views.UpdatesList = require("../views/updatesList");
 
-(function () {
+Rewind.Utils = Rewind.Utils || {};
+Rewind.Utils.BackboneMixin = require("../utils/backboneMixin");
 
-    var fetchInterval = 10000;
+var fetchInterval = 10000;
 
-    Rewind.Views.MyUpdates = React.createClass({
+module.exports = Rewind.Views.MyUpdates = React.createClass({
 
-        mixins: [Rewind.Utils.BackboneMixin],
+    mixins: [Rewind.Utils.BackboneMixin],
 
-        getBackboneModels: function () {
-            return [this.state.updates];
-        },
+    getBackboneModels: function () {
+        return [this.state.updates];
+    },
 
-        handleUpdateSubmit: function (text) {
+    handleUpdateSubmit: function (text) {
 
-            var update = new Rewind.Models.Update({
-                timestamp: (new Date()).toISOString(),
-                text: text
-            });
+        var update = new Rewind.Models.Update({
+            timestamp: (new Date()).toISOString(),
+            text: text
+        });
 
-            this.state.updates.add(update);
-            update.save();
+        this.state.updates.add(update);
+        update.save();
 
-        },
+    },
 
-        getInitialState: function () {
+    handleDelete: function (id) {
+        var update = this.state.updates.get(id);
+        update.destroy();
+    },
 
-            var updatesCollection = new Rewind.Collections.Updates({
-                url: "/api/updates"
-            });
+    getInitialState: function () {
 
-            return {
-                updates: updatesCollection
-            };
-        },
+        var updatesCollection = new Rewind.Collections.Updates({
+            url: "/api/updates"
+        });
 
-        componentDidMount: function () {
+        return {
+            updates: updatesCollection
+        };
+    },
 
-            var ref = this;
+    componentDidMount: function () {
 
+        var ref = this;
+
+        ref.state.updates.fetch();
+
+        this.fetchTimer = setInterval(function () {
             ref.state.updates.fetch();
+        }, fetchInterval);
 
-            this.fetchTimer = setInterval(function () {
-                ref.state.updates.fetch();
-            }, fetchInterval);
+    },
 
-        },
+    componentWillUnmount: function () {
+        clearInterval(this.fetchTimer);
+    },
 
-        componentWillUnmount: function () {
-            clearInterval(this.fetchTimer);
-        },
+    render: function () {
 
-        render: function () {
+        return (
+            <div className="my_updates">
+                <Rewind.Views.UpdateForm onUpdateSubmit={this.handleUpdateSubmit} />
+                <Rewind.Views.UpdatesList onDelete={this.handleDelete} updates={this.state.updates} />
+            </div>
+        );
+    }
 
-            return (
-                <div className="my_updates">
-                    <Rewind.Views.UpdateForm onUpdateSubmit={this.handleUpdateSubmit} />
-                    <Rewind.Views.UpdatesList updates={this.state.updates} />
-                </div>
-            );
-        }
-
-    });
-
-})();
+});

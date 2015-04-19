@@ -53,3 +53,21 @@ router.post("/", function (req, res, next) {
     });
 
 });
+
+router.delete("/:id", function (req, res, next) {
+
+    var id = req.params["id"];
+
+    updatesController.deleteUpdateBy(id).then(function () {
+
+        res.status(200).contentType("application/json").send();
+        return next;
+
+    }).catch(function (err) {
+
+        res.status(500).send(err);
+        return next;
+
+    });
+
+});
