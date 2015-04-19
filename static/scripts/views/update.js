@@ -12,7 +12,17 @@ Rewind.Views = Rewind.Views || {};
 
             var $el = $(this.getDOMNode());
 
-            $el.fadeIn(800, function () {
+            $el.fadeIn(500, function () {
+                callback();
+            });
+
+        },
+
+        componentWillLeave: function (callback) {
+
+            var $el = $(this.getDOMNode());
+
+            $el.fadeOut(500, function () {
                 callback();
             });
 
@@ -33,6 +43,11 @@ Rewind.Views = Rewind.Views || {};
             clearInterval(this.rerenderTimer);
         },
 
+        handleDelete: function (e) {
+            e.preventDefault();
+            this.props.onDelete(this.props.id);
+        },
+
         render: function () {
             return (
                 <li className="update_box" style={{display: "none"}}>
@@ -40,6 +55,7 @@ Rewind.Views = Rewind.Views || {};
                         <span className="content">{this.props.children}</span>
                     </div>
                     <div className="options">
+                        <button className="delete" onClick={this.handleDelete}>Delete</button>
                         <div className="info">
                             <span className="timestamp">{Rewind.Utils.prettyDate(new Date(this.props.timestamp))}</span> by <span className="username"><a href="http://nathankunicki.com/rewind/">@nathankunicki</a></span>
                         </div>

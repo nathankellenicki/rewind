@@ -29,7 +29,7 @@ Rewind.Views = Rewind.Views || {};
                 var update = this.props.updates.at(i);
                 if (checkUpdateFormat(update)) {
                     updateNodes.push(
-                        <Rewind.Views.Update key={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</Rewind.Views.Update>
+                        <Rewind.Views.Update onDelete={this.props.onDelete} key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</Rewind.Views.Update>
                     );
                 }
             }

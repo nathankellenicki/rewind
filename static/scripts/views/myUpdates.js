@@ -26,6 +26,11 @@ Rewind.Views = Rewind.Views || {};
 
         },
 
+        handleDelete: function (id) {
+            var update = this.state.updates.get(id);
+            update.destroy();
+        },
+
         getInitialState: function () {
 
             var updatesCollection = new Rewind.Collections.Updates({
@@ -58,7 +63,7 @@ Rewind.Views = Rewind.Views || {};
             return (
                 <div className="my_updates">
                     <Rewind.Views.UpdateForm onUpdateSubmit={this.handleUpdateSubmit} />
-                    <Rewind.Views.UpdatesList updates={this.state.updates} />
+                    <Rewind.Views.UpdatesList onDelete={this.handleDelete} updates={this.state.updates} />
                 </div>
             );
         }

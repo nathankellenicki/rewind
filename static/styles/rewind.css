@@ -90,7 +90,7 @@ form.update_form div.options button.image {
 }
 
 form.update_form div.options button.image:hover {
-    background-position: -25.5px -24.5px;
+    background-position: -25.5px -24.6px;
 }
 
 form.update_form div.options button.blog {
@@ -152,6 +152,23 @@ ul.updates_list li.update_box div.options div.info {
     right: 0;
     text-align: right;
     margin-right: 10px;
+}
+
+ul.updates_list li.update_box div.options button.delete {
+    position: absolute;
+    left: 7px;
+    top: 5px;
+    border: 0;
+    font-size: 0;
+    line-height: 0;
+    background: url("../images/icons.png") -74px -2px no-repeat;
+    background-size: 200px 50px;
+    width: 24px;
+    height: 24px;
+}
+
+ul.updates_list li.update_box div.options button.delete:hover {
+    background-position: -74px -23px;
 }
 
 ul.updates_list li.update_box div.options div.info a {
