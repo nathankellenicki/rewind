@@ -4,6 +4,8 @@ Rewind.Views = Rewind.Views || {};
 
 (function () {
 
+    var fetchInterval = 10000;
+
     Rewind.Views.MyUpdates = React.createClass({
 
         mixins: [Rewind.Utils.BackboneMixin],
@@ -43,15 +45,18 @@ Rewind.Views = Rewind.Views || {};
 
             this.fetchTimer = setInterval(function () {
                 ref.state.updates.fetch();
-            }, this.props.pollInterval);
+            }, fetchInterval);
 
+        },
+
+        componentWillUnmount: function () {
+            clearInterval(this.fetchTimer);
         },
 
         render: function () {
 
             return (
                 <div className="my_updates">
-                    <h1>My Updates</h1>
                     <Rewind.Views.UpdateForm onUpdateSubmit={this.handleUpdateSubmit} />
                     <Rewind.Views.UpdatesList updates={this.state.updates} />
                 </div>

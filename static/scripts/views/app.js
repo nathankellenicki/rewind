@@ -7,7 +7,7 @@ Rewind.Views = Rewind.Views || {};
     Rewind.Views.App = React.createClass({
         render: function () {
             return (
-                <Rewind.Views.MyUpdates url="/api/updates" pollInterval={10000} />
+                <Rewind.Views.MyUpdates url="/api/updates" />
             );
         }
     });

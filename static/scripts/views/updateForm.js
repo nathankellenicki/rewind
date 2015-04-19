@@ -23,8 +23,13 @@ Rewind.Views = Rewind.Views || {};
         render: function () {
             return (
                 <form className="update_form" onSubmit={this.handleSubmit}>
-                    <input type="text" placeholder="What's on your mind?" ref="text"/>
-                    <input type="submit" value="Post"/>
+                    <textarea placeholder="What's on your mind?" ref="text"></textarea>
+                    <div className="options">
+                        <button className="location">Add Location</button>
+                        <button className="image">Add Image</button>
+                        <button className="blog">Add Blog</button>
+                        <input type="submit" value="Post" />
+                    </div>
                 </form>
             );
         }

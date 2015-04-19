@@ -1,0 +1,163 @@
+body {
+    background-color: #E9EAED;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #788499;
+}
+
+div.my_updates {
+    position: relative;
+    top: 20px;
+    left: 50%;
+    width: 700px;
+    background-color: #FFFFFF;
+    margin-left: -410px;
+    padding: 60px;
+}
+
+form.update_form {
+    background-color: #FFFFFF;
+    margin-bottom: 20px;
+    border: 1px solid #BBC9D1;
+    border-radius: 3px;
+}
+
+form.update_form textarea {
+    width: 100%;
+    height: 88px;
+    display: block;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px;
+    resize: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 0;
+}
+
+form.update_form textarea::-webkit-input-placeholder { /* WebKit */
+    color: #ADB6C1;
+}
+
+form.update_form textarea:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #ADB6C1;
+}
+
+form.update_form textarea::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #ADB6C1;
+}
+
+form.update_form textarea:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: #ADB6C1;
+}
+
+form.update_form div.options {
+    text-align: right;
+    height: 40px;
+    padding: 10px;
+    position: relative;
+    font-size: 14px;
+    background-color: #F6F7F8;
+    color: #8897A7;
+}
+
+form.update_form div.options button {
+    position: relative;
+    top: -4px;
+    border: 0;
+    font-size: 0;
+    line-height: 0;
+    margin-right: 5px;
+}
+
+form.update_form div.options button.location {
+    background: url("../images/icons.png") -1px -2px no-repeat;
+    background-size: 200px 50px;
+    width: 24px;
+    height: 24px;
+}
+
+form.update_form div.options button.location:hover {
+    background-position: -1px -25.5px;
+}
+
+form.update_form div.options button.image {
+    background: url("../images/icons.png") -25.5px -2px no-repeat;
+    background-size: 200px 50px;
+    width: 24px;
+    height: 24px;
+}
+
+form.update_form div.options button.image:hover {
+    background-position: -25.5px -24.5px;
+}
+
+form.update_form div.options button.blog {
+    background: url("../images/icons.png") -51px -2px no-repeat;
+    background-size: 200px 50px;
+    width: 24px;
+    height: 24px;
+}
+
+form.update_form div.options button.blog:hover {
+    background-position: -51px -24px;
+}
+
+form.update_form input {
+    color: #FFFFFF;
+    margin-left: 10px;
+    background-color: #ED3148;
+    width: 120px;
+    height: 40px;
+    border: 0;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+form.update_form input:hover {
+    background-color: #CE2D42;
+}
+
+ul.updates_list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.updates_list li.update_box {
+    background-color: #FFFFFF;
+    margin-bottom: 20px;
+    border: 1px solid #BBC9D1;
+    border-radius: 3px;
+}
+
+ul.updates_list li.update_box div.update {
+    padding: 10px;
+}
+
+ul.updates_list li.update_box div.options {
+    height: 13px;
+    padding: 10px;
+    position: relative;
+    font-size: 0.8em;
+    background-color: #F6F7F8;
+    color: #8897A7;
+}
+
+ul.updates_list li.update_box div.options div.info {
+    position: absolute;
+    width: 300px;
+    right: 0;
+    text-align: right;
+    margin-right: 10px;
+}
+
+ul.updates_list li.update_box div.options div.info a {
+    color: #8897A7;
+}
+
+ul.updates_list li.update_box div.options div.info a:hover {
+    color: #788499;
+}
