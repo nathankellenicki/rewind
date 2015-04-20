@@ -14,8 +14,7 @@ gulp.task("watch", function () {
         transform: [reactify],
         debug: true,
         cache: {},
-        packageCache: {},
-        fullPaths: true
+        packageCache: {}
     });
 
     var watcher = watchify(bundler);
@@ -28,14 +27,14 @@ gulp.task("watch", function () {
             console.log('Change detected, updating');
             watcher.bundle()
                 .pipe(source("main.js"))
-                .pipe(gulp.dest("./static/scripts/build/"));
+                .pipe(gulp.dest("./static/dist/"));
 
             console.log('Updated in', (Date.now() - updateStart) + 'ms');
 
         })
         .bundle()
         .pipe(source("main.js"))
-        .pipe(gulp.dest("./static/scripts/build/"));
+        .pipe(gulp.dest("./static/dist/"));
 
 });
 
@@ -46,15 +45,14 @@ gulp.task("build", function () {
         transform: [reactify],
         debug: true,
         cache: {},
-        packageCache: {},
-        fullPaths: true
+        packageCache: {}
     });
 
     bundler.bundle()
         .pipe(source("main.js"))
         .pipe(buffer())
         .pipe(uglify())
-        .pipe(gulp.dest("./static/scripts/build/"));
+        .pipe(gulp.dest("./static/dist/"));
 
 });
 

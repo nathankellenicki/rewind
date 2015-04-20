@@ -1,8 +1,7 @@
-var Rewind = Rewind || {};
+// Load React compoents
+var UpdateComponent = require("./update.react");
 
-Rewind.Views = Rewind.Views || {};
-Rewind.Views.Update = require("./update");
-
+// Makes sure an update has the required fields
 var checkUpdateFormat = function (update) {
 
     var requiredFields = ["id", "timestamp", "text"];
@@ -17,9 +16,11 @@ var checkUpdateFormat = function (update) {
 
 };
 
-var ULContainerTransitionGroup = React.addons.TransitionGroup;
+var TransitionGroupContainer = React.addons.TransitionGroup;
 
-module.exports = Rewind.Views.UpdatesList = React.createClass({
+
+// Exports
+module.exports = UpdatesListComponent = React.createClass({
     render: function () {
 
         var updateNodes = [];
@@ -28,15 +29,15 @@ module.exports = Rewind.Views.UpdatesList = React.createClass({
             var update = this.props.updates.at(i);
             if (checkUpdateFormat(update)) {
                 updateNodes.push(
-                    <Rewind.Views.Update onDelete={this.props.onDelete} key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</Rewind.Views.Update>
+                    <UpdateComponent onDelete={this.props.onDelete} key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</UpdateComponent>
                 );
             }
         }
 
         return (
-            <ULContainerTransitionGroup component="ul" className="updates_list">
+            <TransitionGroupContainer component="ul" className="updates_list">
                 {updateNodes}
-            </ULContainerTransitionGroup>
+            </TransitionGroupContainer>
         );
 
     }

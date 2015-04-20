@@ -1,7 +1,4 @@
-var Rewind = Rewind || {};
-
-Rewind.Utils = Rewind.Utils || {};
-
+// Helper function to create returns from specific time delimeters
 var createHandler = function (divisor, noun, restOfString) {
     return function (diff) {
 
@@ -92,7 +89,8 @@ var formatters = [
 ];
 
 
-module.exports = Rewind.Utils.prettyDate = function (date) {
+// Exports
+module.exports = prettyDate = function (date) {
 
         var diff = (((new Date()).getTime() - date.getTime()) / 1000);
 

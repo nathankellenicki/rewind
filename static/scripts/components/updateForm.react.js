@@ -1,8 +1,5 @@
-var Rewind = Rewind || {};
-
-Rewind.Views = Rewind.Views || {};
-
-module.exports = Rewind.Views.UpdateForm = React.createClass({
+// Exports
+module.exports = UpdateFormComponent = React.createClass({
 
     handleSubmit: function (e) {
 

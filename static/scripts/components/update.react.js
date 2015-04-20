@@ -1,12 +1,12 @@
-var Rewind = Rewind || {};
+// Load utility functions
+var prettyDate = require("../utils/prettyDate");
 
-Rewind.Views = Rewind.Views || {};
-Rewind.Utils = Rewind.Utils || {};
-Rewind.Utils.prettyDate = require("../utils/prettyDate");
-
+// Setup vars
 var rerenderTimer = 30000;
 
-module.exports = Rewind.Views.Update = React.createClass({
+
+// Exports
+module.exports = UpdateComponent = React.createClass({
 
     componentWillEnter: function (callback) {
 
@@ -57,7 +57,7 @@ module.exports = Rewind.Views.Update = React.createClass({
                 <div className="options">
                     <button className="delete" onClick={this.handleDelete}>Delete</button>
                     <div className="info">
-                        <span className="timestamp">{Rewind.Utils.prettyDate(new Date(this.props.timestamp))}</span> by <span className="username"><a href="http://nathankunicki.com/rewind/">@nathankunicki</a></span>
+                        <span className="timestamp">{prettyDate(new Date(this.props.timestamp))}</span> by <span className="username"><a href="http://nathankunicki.com/rewind/">@nathankunicki</a></span>
                     </div>
                 </div>
             </li>
