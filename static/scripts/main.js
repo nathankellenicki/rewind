@@ -1,10 +1,10 @@
-var Rewind = Rewind || {};
+// Load router
+var Router = require("./router");
 
-Rewind.Router = require("./router");
-
+// Wait until the DOM is ready before starting
 $(document).ready(function () {
 
-    Rewind.router = new Rewind.Router();
+    router = new Router();
 
     Backbone.history.start({
         root: "/",

@@ -1,23 +1,24 @@
-var Rewind = Rewind || {};
+// Load models
+var UpdateModel = require("../models/update");
 
-Rewind.Models = Rewind.Models || {};
-Rewind.Models.Update = require("../models/update");
+// Load collections
+var UpdatesCollection = require("../collections/updates");
 
-Rewind.Collections = Rewind.Collections || {};
-Rewind.Collections.Updates = require("../collections/updates");
+// Load React components
+var UpdateFormComponent = require("../components/updateForm.react"),
+    UpdatesListComponent = require("../components/updatesList.react");
 
-Rewind.Views = Rewind.Views || {};
-Rewind.Views.UpdateForm = require("../views/updateForm");
-Rewind.Views.UpdatesList = require("../views/updatesList");
+// This mixing allows Backbone updates to trigger React renders
+var BackboneMixin = require("../utils/backboneMixin");
 
-Rewind.Utils = Rewind.Utils || {};
-Rewind.Utils.BackboneMixin = require("../utils/backboneMixin");
-
+// Setup vars
 var fetchInterval = 10000;
 
-module.exports = Rewind.Views.MyUpdates = React.createClass({
 
-    mixins: [Rewind.Utils.BackboneMixin],
+// Exports
+module.exports = YourUpdatesCompoent = React.createClass({
+
+    mixins: [BackboneMixin],
 
     getBackboneModels: function () {
         return [this.state.updates];
@@ -25,7 +26,7 @@ module.exports = Rewind.Views.MyUpdates = React.createClass({
 
     handleUpdateSubmit: function (text) {
 
-        var update = new Rewind.Models.Update({
+        var update = new UpdateModel({
             timestamp: (new Date()).toISOString(),
             text: text
         });
@@ -42,7 +43,7 @@ module.exports = Rewind.Views.MyUpdates = React.createClass({
 
     getInitialState: function () {
 
-        var updatesCollection = new Rewind.Collections.Updates({
+        var updatesCollection = new UpdatesCollection({
             url: "/api/updates"
         });
 
@@ -71,8 +72,8 @@ module.exports = Rewind.Views.MyUpdates = React.createClass({
 
         return (
             <div className="my_updates">
-                <Rewind.Views.UpdateForm onUpdateSubmit={this.handleUpdateSubmit} />
-                <Rewind.Views.UpdatesList onDelete={this.handleDelete} updates={this.state.updates} />
+                <UpdateFormComponent onUpdateSubmit={this.handleUpdateSubmit} />
+                <UpdatesListComponent onDelete={this.handleDelete} updates={this.state.updates} />
             </div>
         );
     }

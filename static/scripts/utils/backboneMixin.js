@@ -1,8 +1,5 @@
-var Rewind = Rewind || {};
-
-Rewind.Utils = Rewind.Utils || {};
-
-module.exports = Rewind.Utils.BackboneMixin = {
+// Exports
+module.exports = BackboneMixin = {
 
     componentDidMount: function () {
 

@@ -1,13 +1,11 @@
-var Rewind = Rewind || {};
+// Load models
+var UpdateModel = require("../models/update");
 
-Rewind.Models = Rewind.Models || {};
-Rewind.Collections = Rewind.Collections || {};
 
-Rewind.Models.Update = require("../models/update");
+// Exports
+module.exports = UpdatesCollection = Backbone.Collection.extend({
 
-module.exports = Rewind.Collections.Updates = Backbone.Collection.extend({
-
-    model: Rewind.Models.Update,
+    model: UpdateModel,
 
     comparator: function (update1, update2) {
         return (new Date(update2.get("timestamp")) - new Date(update1.get("timestamp")));
