@@ -1,12 +1,23 @@
+// Load actions
+var UpdateActions = require("../actions/update");
+
 // Load utility functions
 var prettyDate = require("../utils/prettyDate");
 
 // Setup vars
-var rerenderTimer = 30000;
+var renderTimer,
+    renderInterval = 30000;
 
 
 // Exports
 module.exports = UpdateComponent = React.createClass({
+
+    _handleDelete: function (e) {
+
+        e.preventDefault();
+        UpdateActions.destroy(this.props.id);
+
+    },
 
     componentWillEnter: function (callback) {
 
@@ -33,19 +44,14 @@ module.exports = UpdateComponent = React.createClass({
         var ref = this;
 
         // We force an update every so often in order to keep displayed date/times relatively up to date
-        this.rerenderTimer = setInterval(function () {
+        this.renderTimer = setInterval(function () {
             ref.forceUpdate.call(ref);
-        }, rerenderTimer);
+        }, renderInterval);
 
     },
 
     componentWillUnmount: function () {
-        clearInterval(this.rerenderTimer);
-    },
-
-    handleDelete: function (e) {
-        e.preventDefault();
-        this.props.onDelete(this.props.id);
+        clearInterval(this.renderTimer);
     },
 
     render: function () {
@@ -55,7 +61,7 @@ module.exports = UpdateComponent = React.createClass({
                     <span className="content">{this.props.children}</span>
                 </div>
                 <div className="options">
-                    <button className="delete" onClick={this.handleDelete}>Delete</button>
+                    <button className="delete" onClick={this._handleDelete}>Delete</button>
                     <div className="info">
                         <span className="timestamp">{prettyDate(new Date(this.props.timestamp))}</span> by <span className="username"><a href="http://nathankunicki.com/rewind/">@nathankunicki</a></span>
                     </div>

@@ -1,3 +1,7 @@
+// Load actions
+var UpdateActions = require("../actions/update");
+
+
 // Exports
 module.exports = UpdateFormComponent = React.createClass({
 
@@ -10,7 +14,7 @@ module.exports = UpdateFormComponent = React.createClass({
             return;
         }
 
-        this.props.onUpdateSubmit(text);
+        UpdateActions.create(text);
         React.findDOMNode(this.refs.text).value = "";
 
     },
@@ -30,3 +34,5 @@ module.exports = UpdateFormComponent = React.createClass({
     }
 
 });
+
+

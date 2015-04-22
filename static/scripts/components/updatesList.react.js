@@ -1,6 +1,13 @@
 // Load React compoents
 var UpdateComponent = require("./update.react");
 
+// Load actions
+var UpdateActions = require("../actions/update");
+
+// Load stores
+var UpdatesStore = require("../stores/updates");
+
+
 // Makes sure an update has the required fields
 var checkUpdateFormat = function (update) {
 
@@ -16,20 +23,47 @@ var checkUpdateFormat = function (update) {
 
 };
 
+
+// Fetch current state from store
+var constructState = function () {
+    return {
+        updates: UpdatesStore.getAll()
+    }
+};
+
+
 var TransitionGroupContainer = React.addons.TransitionGroup;
 
 
 // Exports
 module.exports = UpdatesListComponent = React.createClass({
+
+    _onChange: function () {
+        this.setState(constructState());
+    },
+
+    componentDidMount: function () {
+        UpdatesStore.addChangeListener(this._onChange);
+    },
+
+    componentWillUnmount: function () {
+        UpdatesStore.removeChangeListener(this._onChange);
+    },
+
+    getInitialState: function () {
+        UpdateActions.changeURL(this.props.endpoint);
+        return constructState();
+    },
+
     render: function () {
 
         var updateNodes = [];
 
-        for (var i = 0; i < this.props.updates.length; i++) {
-            var update = this.props.updates.at(i);
+        for (var i = 0; i < this.state.updates.length; i++) {
+            var update = this.state.updates.at(i);
             if (checkUpdateFormat(update)) {
                 updateNodes.push(
-                    <UpdateComponent onDelete={this.props.onDelete} key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</UpdateComponent>
+                    <UpdateComponent key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</UpdateComponent>
                 );
             }
         }
@@ -41,4 +75,5 @@ module.exports = UpdatesListComponent = React.createClass({
         );
 
     }
+
 });
