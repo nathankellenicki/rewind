@@ -20,7 +20,7 @@ router.get("/", function (req, res, next) {
 
     updatesController.getRecentUpdates(startPoint).then(function (updates) {
 
-        res.status(200).contentType("application/json").send(updatesView({
+        res.status(200).send(updatesView({
             updates: updates
         }));
         return next;
@@ -40,7 +40,7 @@ router.post("/", function (req, res, next) {
 
     updatesController.createUpdate(text).then(function (update) {
 
-        res.status(200).contentType("application/json").send(updateView({
+        res.status(200).send(updateView({
             update: update
         }));
         return next;
@@ -60,7 +60,7 @@ router.delete("/:id", function (req, res, next) {
 
     updatesController.deleteUpdateBy(id).then(function () {
 
-        res.status(200).contentType("application/json").send();
+        res.status(200).send({});
         return next;
 
     }).catch(function (err) {

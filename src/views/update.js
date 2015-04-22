@@ -6,6 +6,6 @@ module.exports = function (data) {
         "timestamp": data.update.timestamp
     };
 
-    return JSON.stringify(update);
+    return update;
 
 };
