@@ -26,7 +26,13 @@ module.exports = UpdateActions = {
       AppDispatcher.dispatch({
           actionType: UpdateConstants.CHANGE_URL,
           url: url
-      })
+      });
+  },
+
+  sync: function () {
+      AppDispatcher.dispatch({
+          actionType: UpdateConstants.SYNC
+      });
   }
 
 };

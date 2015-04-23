@@ -14,10 +14,6 @@ var UpdateModel = require("../models/update");
 // Constants
 var CHANGE_EVENT = "change";
 
-// Setup vars
-var syncTimer = null,
-    fetchInterval = 10000; // 10 seconds
-
 
 // Define the Backbone collection (Initialized below)
 var UpdatesCollection = Backbone.Collection.extend({
@@ -52,22 +48,11 @@ var UpdatesStore = assign({}, EventEmitter.prototype, {
     },
 
     addChangeListener: function (callback) {
-
         this.on(CHANGE_EVENT, callback);
-
-        if (EventEmitter.listenerCount(this, CHANGE_EVENT) == 1) {
-            startSync();
-        }
-
     },
 
     removeChangeListener: function (callback) {
         this.removeListener(CHANGE_EVENT, callback);
-
-        if (EventEmitter.listenerCount(this, CHANGE_EVENT) <= 0) {
-            stopSync();
-        }
-
     }
 
 });
@@ -105,22 +90,9 @@ var changeURL = function (url) {
 };
 
 
-// Begin syncing to the server
-var startSync = function () {
-
+// Sync to the server
+var sync = function () {
     updatesCollection.fetch();
-
-    syncTimer = setInterval(function () {
-        updatesCollection.fetch();
-    }, fetchInterval);
-
-};
-
-
-// Stop the sync
-var stopSync = function () {
-    clearInterval(syncTimer);
-    syncTimer = null;
 };
 
 
@@ -149,6 +121,12 @@ AppDispatcher.register(function (action) {
         case UpdateConstants.CHANGE_URL:
 
             changeURL(action.url);
+            break;
+
+
+        case UpdateConstants.SYNC:
+
+            sync();
             break;
 
         default:

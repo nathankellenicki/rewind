@@ -32,7 +32,9 @@ var constructState = function () {
 };
 
 
-var TransitionGroupContainer = React.addons.TransitionGroup;
+var TransitionGroupContainer = React.addons.TransitionGroup,
+    syncTimer = null,
+    fetchInterval = 10000;
 
 
 // Exports
@@ -44,10 +46,19 @@ module.exports = UpdatesListComponent = React.createClass({
 
     componentDidMount: function () {
         UpdatesStore.addChangeListener(this._onChange);
+
+        UpdateActions.sync();
+
+        syncTimer = setInterval(function () {
+            UpdateActions.sync();
+        }, fetchInterval);
+
     },
 
     componentWillUnmount: function () {
         UpdatesStore.removeChangeListener(this._onChange);
+        clearInterval(syncTimer);
+        syncTimer = null;
     },
 
     getInitialState: function () {
