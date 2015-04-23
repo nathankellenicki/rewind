@@ -33,6 +33,7 @@ form.update_form textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    outline-width: 0;
     border: 0;
 }
 
@@ -62,10 +63,28 @@ form.update_form div.options {
     color: #8897A7;
 }
 
+form.update_form div.location {
+    padding: 10px;
+    border-top: 1px solid #BBC9D1;
+}
+
+form.update_form div.location div.info {
+    color: #ADB6C1;
+}
+
+form.update_form div.location iframe.map {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin-top: 10px;
+    border: 0;
+}
+
 form.update_form div.options button {
     position: relative;
     top: -4px;
     border: 0;
+    outline-width: 0;
     font-size: 0;
     line-height: 0;
     margin-right: 5px;
@@ -110,6 +129,7 @@ form.update_form input {
     background-color: #ED3148;
     width: 120px;
     height: 40px;
+    outline-width: 0;
     border: 0;
     font-size: 16px;
     font-weight: bold;
@@ -159,6 +179,7 @@ ul.updates_list li.update_box div.options button.delete {
     left: 7px;
     top: 5px;
     border: 0;
+    outline-width: 0;
     font-size: 0;
     line-height: 0;
     background: url("../images/icons.png") -74px -2px no-repeat;
