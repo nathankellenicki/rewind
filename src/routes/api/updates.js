@@ -4,12 +4,12 @@
 var express = require("express");
 
 // Load controllers
-var UpdatesController = require("../controllers/updates"),
+var UpdatesController = require("../../controllers/updates"),
     updatesController = new UpdatesController();
 
 // Load views
-var updateView = require("../views/update"),
-    updatesView = require("../views/updates");
+var updateView = require("../../views/update"),
+    updatesView = require("../../views/updates");
 
 // Setup routes
 var router = module.exports = express.Router();

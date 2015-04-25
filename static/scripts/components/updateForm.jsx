@@ -1,3 +1,6 @@
+// Load dependencies
+var React = require("react/addons");
+
 // Load actions
 var UpdateActions = require("../actions/update");
 
@@ -5,7 +8,7 @@ var UpdateActions = require("../actions/update");
 var UpdateFormConstants = require("../constants/updateForm");
 
 // Load React components
-var UpdateFormLocationOption = require("../components/updateFormLocationOption.react");
+var UpdateFormLocationOption = require("./updateFormLocationOption.jsx");
 
 // This maps the below classNames to option constants
 var optionTypeMapping = {
@@ -15,11 +18,11 @@ var optionTypeMapping = {
 };
 
 // Setup vars
-var TransitionGroupContainer = React.addons.TransitionGroup;
+var TransitionGroupContainer = React.addons.CSSTransitionGroup;
 
 
 // Exports
-module.exports = UpdateFormComponent = React.createClass({
+var UpdateFormComponent = module.exports = React.createClass({
 
     _viewState: {
         options: []
@@ -76,14 +79,14 @@ module.exports = UpdateFormComponent = React.createClass({
 
         if (this._isOptionSet(UpdateFormConstants.OPTION_LOCATION)) {
             optionViews.push(
-                <UpdateFormLocationOption />
+                <UpdateFormLocationOption key={"location"} />
             );
         }
 
         return (
             <form className="update_form" onSubmit={this.handleSubmit}>
                 <textarea placeholder="What's on your mind?" ref="text"></textarea>
-                <TransitionGroupContainer className="option_container">
+                <TransitionGroupContainer className="option_container" transitionName="sliding">
                     {optionViews}
                 </TransitionGroupContainer>
                 <div className="options">

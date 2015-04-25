@@ -90,7 +90,7 @@ var formatters = [
 
 
 // Exports
-module.exports = prettyDate = function (date) {
+var prettyDate = module.exports = function (date) {
 
         var diff = (((new Date()).getTime() - date.getTime()) / 1000);
 

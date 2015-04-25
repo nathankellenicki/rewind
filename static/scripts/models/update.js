@@ -1,5 +1,5 @@
 // Exports
-module.exports = UpdateModel = Backbone.Model.extend({
+var UpdateModel = module.exports = Backbone.Model.extend({
 
     defaults: {
         "timestamp": null,

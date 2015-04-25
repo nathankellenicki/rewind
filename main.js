@@ -1,8 +1,5 @@
 "use strict";
 
-// Initialise Babel for ES6
-require("babel/register");
-
 // Include app and initialize models
 var app = require("./src/app"),
     models = require("./src/models");

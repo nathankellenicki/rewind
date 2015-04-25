@@ -6,7 +6,7 @@ var UpdateConstants = require("../constants/update");
 
 
 // Exports
-module.exports = UpdateActions = {
+var UpdateActions = module.exports = {
 
   create: function (text) {
       AppDispatcher.dispatch({

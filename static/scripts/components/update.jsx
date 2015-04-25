@@ -1,3 +1,6 @@
+// Load dependencies
+var React = require("react/addons");
+
 // Load actions
 var UpdateActions = require("../actions/update");
 
@@ -10,32 +13,12 @@ var renderTimer,
 
 
 // Exports
-module.exports = UpdateComponent = React.createClass({
+var UpdateComponent = module.exports = React.createClass({
 
     _handleDelete: function (e) {
 
         e.preventDefault();
         UpdateActions.destroy(this.props.id);
-
-    },
-
-    componentWillEnter: function (callback) {
-
-        var $el = $(this.getDOMNode());
-
-        $el.fadeIn(500, function () {
-            callback();
-        });
-
-    },
-
-    componentWillLeave: function (callback) {
-
-        var $el = $(this.getDOMNode());
-
-        $el.fadeOut(500, function () {
-            callback();
-        });
 
     },
 
@@ -56,7 +39,7 @@ module.exports = UpdateComponent = React.createClass({
 
     render: function () {
         return (
-            <li className="update_box" style={{display: "none"}}>
+            <li className="update_box">
                 <div className="update">
                     <span className="content">{this.props.children}</span>
                 </div>

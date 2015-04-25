@@ -1,5 +1,5 @@
 // Exports
-module.exports = getCurrentLocation = function (callback) {
+var getCurrentLocation = module.exports = function (callback) {
 
     if (navigator.geolocation) {
 

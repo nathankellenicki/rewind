@@ -1,11 +1,19 @@
+// Load dependencies
+var React = require("react/addons");
+
 // Load React compoents
-var UpdateComponent = require("./update.react");
+var UpdateComponent = require("./update.jsx");
 
 // Load actions
 var UpdateActions = require("../actions/update");
 
+// Load utilities
+var CommonFunctions = require("../utils/commonFunctions");
+
 // Load stores
-var UpdatesStore = require("../stores/updates");
+if (!CommonFunctions.isRunningOnServer()) {
+    var UpdatesStore = require("../stores/updates");
+}
 
 
 // Makes sure an update has the required fields
@@ -24,24 +32,31 @@ var checkUpdateFormat = function (update) {
 };
 
 
-// Fetch current state from store
-var constructState = function () {
-    return {
-        updates: UpdatesStore.getAll()
-    }
-};
-
-
-var TransitionGroupContainer = React.addons.TransitionGroup,
+// Setup vars
+var TransitionGroupContainer = React.addons.CSSTransitionGroup,
     syncTimer = null,
     fetchInterval = 10000;
 
 
 // Exports
-module.exports = UpdatesListComponent = React.createClass({
+var UpdatesListComponent = module.exports = React.createClass({
+
+    _constructState: function () {
+
+        if (CommonFunctions.isRunningOnServer()) {
+            return {
+                updates: this.props.serverRenderedUpdates
+            }
+        } else {
+            return {
+                updates: UpdatesStore.getAll()
+            }
+        }
+
+    },
 
     _onChange: function () {
-        this.setState(constructState());
+        this.setState(this._constructState());
     },
 
     componentDidMount: function () {
@@ -63,7 +78,7 @@ module.exports = UpdatesListComponent = React.createClass({
 
     getInitialState: function () {
         UpdateActions.changeURL(this.props.endpoint);
-        return constructState();
+        return this._constructState();
     },
 
     render: function () {
@@ -80,7 +95,7 @@ module.exports = UpdatesListComponent = React.createClass({
         }
 
         return (
-            <TransitionGroupContainer component="ul" className="updates_list">
+            <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading">
                 {updateNodes}
             </TransitionGroupContainer>
         );

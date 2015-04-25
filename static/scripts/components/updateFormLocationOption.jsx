@@ -1,3 +1,6 @@
+// Load dependencies
+var React = require("react/addons");
+
 // Load constants
 var UpdateFormConstants = require("../constants/updateForm");
 
@@ -34,7 +37,7 @@ var constructOSMURL = function (currentLocation) {
 
 
 // Exports
-module.exports = UpdateFormLocationOptionComponent = React.createClass({
+var UpdateFormLocationOptionComponent = module.exports = React.createClass({
 
     _viewState: {
         locationState: UpdateFormConstants.LOCATION_FETCHING,
@@ -64,26 +67,6 @@ module.exports = UpdateFormLocationOptionComponent = React.createClass({
         getCurrentLocation(this._onLocationFound);
     },
 
-    componentWillEnter: function (callback) {
-
-        var $el = $(this.getDOMNode());
-
-        $el.slideDown(500, function () {
-            callback();
-        });
-
-    },
-
-    componentWillLeave: function (callback) {
-
-        var $el = $(this.getDOMNode());
-
-        $el.slideUp(500, function () {
-            callback();
-        });
-
-    },
-
     getInitialState: function () {
         return this._viewState;
     },
@@ -95,7 +78,7 @@ module.exports = UpdateFormLocationOptionComponent = React.createClass({
             case UpdateFormConstants.LOCATION_FETCHING:
 
                 return (
-                    <div className="location fetching" style={{display: "none"}}>
+                    <div className="location fetching">
                         <div className="info">Fetching location...</div>
                     </div>
                 );

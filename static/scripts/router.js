@@ -1,9 +1,12 @@
+// Load dependencies
+var React = require("react/addons");
+
 // Load React components
-var AppComponent = require("./components/app.react");
+var AppComponent = require("./components/app.jsx");
 
 
 // Exports
-module.exports = Router = Backbone.Router.extend({
+var Router = module.exports = Backbone.Router.extend({
 
     routes: {
         "*filter" : "setFilter"
