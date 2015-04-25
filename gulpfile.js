@@ -10,7 +10,7 @@ var gulp = require("gulp"),
 gulp.task("watch", function () {
 
     var bundler = browserify({
-        entries: ["./static/scripts/main.js"],
+        entries: ["./src/client/main.js"],
         transform: [reactify],
         debug: true,
         cache: {},
@@ -41,7 +41,7 @@ gulp.task("watch", function () {
 gulp.task("build", function () {
 
     var bundler = browserify({
-        entries: ["./static/scripts/main.js"],
+        entries: ["./src/client/main.js"],
         transform: [reactify],
         debug: true,
         cache: {},

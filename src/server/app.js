@@ -16,7 +16,7 @@ var port = process.env.PORT || 8080;
 
 // Setup the server
 var app = express(),
-    accessLogStream = fs.createWriteStream(__dirname + "/../access.log", {flags: "a"});
+    accessLogStream = fs.createWriteStream(__dirname + "/../../access.log", {flags: "a"});
 
 app.use(morgan("combined", {stream: accessLogStream}));
 app.use(bodyParser.json());

@@ -8,7 +8,7 @@ var React = require("react"),
     express = require("express");
 
 // Load React components (As factories)
-var YourUpdatesComponent = React.createFactory(require("../../static/scripts/components/yourUpdates.jsx"));
+var YourUpdatesComponent = React.createFactory(require("../../shared/components/yourUpdates.jsx"));
 
 // Load controllers
 var UpdatesController = require("../controllers/updates"),

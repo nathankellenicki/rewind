@@ -2,10 +2,10 @@
 var React = require("react/addons");
 
 // Load actions
-var UpdateActions = require("../actions/update");
+var UpdateActions = require("../../client/actions/update");
 
 // Load constants
-var UpdateFormConstants = require("../constants/updateForm");
+var UpdateFormConstants = require("../../client/constants/updateForm");
 
 // Load React components
 var UpdateFormLocationOption = require("./updateFormLocationOption.jsx");

@@ -2,7 +2,7 @@
 var React = require("react/addons");
 
 // Load actions
-var UpdateActions = require("../actions/update");
+var UpdateActions = require("../../client/actions/update");
 
 // Load utility functions
 var prettyDate = require("../utils/prettyDate");

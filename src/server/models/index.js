@@ -8,7 +8,7 @@ var fs = require("fs"),
 // Setup the database
 var sequelize = new Sequelize(null, null, null, {
     dialect: "sqlite",
-    storage: __dirname + "/../../rewind.sqlite"
+    storage: __dirname + "/../../../rewind.sqlite"
 });
 
 var db = {};

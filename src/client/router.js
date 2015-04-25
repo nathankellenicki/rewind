@@ -2,7 +2,7 @@
 var React = require("react/addons");
 
 // Load React components
-var AppComponent = require("./components/app.jsx");
+var AppComponent = require("../shared/components/app.jsx");
 
 
 // Exports

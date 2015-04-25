@@ -5,14 +5,14 @@ var React = require("react/addons");
 var UpdateComponent = require("./update.jsx");
 
 // Load actions
-var UpdateActions = require("../actions/update");
+var UpdateActions = require("../../client/actions/update");
 
 // Load utilities
 var CommonFunctions = require("../utils/commonFunctions");
 
 // Load stores
 if (!CommonFunctions.isRunningOnServer()) {
-    var UpdatesStore = require("../stores/updates");
+    var UpdatesStore = require("../../client/stores/updates");
 }
 
 

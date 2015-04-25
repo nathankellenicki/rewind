@@ -2,10 +2,10 @@
 var React = require("react/addons");
 
 // Load constants
-var UpdateFormConstants = require("../constants/updateForm");
+var UpdateFormConstants = require("../../client/constants/updateForm");
 
 // Load utility functions
-var getCurrentLocation = require("../utils/getCurrentLocation");
+var getCurrentLocation = require("../../client/utils/getCurrentLocation");
 
 
 // Construct an OpenStreetMap embeddable URL from some params
