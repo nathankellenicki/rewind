@@ -5,5 +5,8 @@
   "url": "http://rewind.nathankunicki.com",
   "db": {
     "engine": "postgres"
+  },
+  "heroku": {
+    "keep-alive": true
   }
 }
