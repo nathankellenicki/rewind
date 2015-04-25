@@ -9,8 +9,8 @@ var fs = require("fs"),
 var config = require("../utils/config");
 
 // Setup the database
-var sequelize = new Sequelize(null, null, null, {
-    dialect: "sqlite",
+var sequelize = new Sequelize(config.db.hostname, config.db.username, config.db.password, {
+    dialect: config.db.engine,
     storage: config.db.file
 });
 
