@@ -4,7 +4,6 @@
   "access_log": "./access.log",
   "url": "http://rewind.nathankunicki.com",
   "db": {
-    "engine": "postgres",
-    "database": "d3a1qp4ghhj41a"
+    "engine": "postgres"
   }
 }
