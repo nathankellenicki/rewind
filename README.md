@@ -1,4 +1,4 @@
-# Rewind - A personal timeline and distributed social network engine built in Node.js
+# Rewind - A personal timeline and distributed social network engine
 
 ## About
 
