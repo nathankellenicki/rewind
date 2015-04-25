@@ -5,10 +5,13 @@ var fs = require("fs"),
     path = require("path"),
     Sequelize = require("sequelize");
 
+// Load config
+var config = require("../utils/config");
+
 // Setup the database
 var sequelize = new Sequelize(null, null, null, {
     dialect: "sqlite",
-    storage: __dirname + "/../../../rewind.sqlite"
+    storage: config.db.file
 });
 
 var db = {};

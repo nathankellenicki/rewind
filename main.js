@@ -4,8 +4,11 @@
 var app = require("./src/server/app"),
     models = require("./src/server/models");
 
+// Load config
+var config = require("./src/server/utils/config");
+
 // Config
-app.set("port", process.env.PORT || 8080);
+app.set("port", config.port);
 
 // Start listening
 models.sequelize.sync().then(function () {

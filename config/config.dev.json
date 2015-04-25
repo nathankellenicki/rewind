@@ -1,0 +1,9 @@
+{
+  "port": 8080,
+  "username": "nathankunicki",
+  "access_log": "./access.log",
+  "db": {
+    "engine": "sqlite",
+    "file": "./rewind.sqlite"
+  }
+}

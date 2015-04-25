@@ -9,14 +9,12 @@ var express = require("express"), // HTTP routing
     morgan = require("morgan"), // Apache compatible access logging
     fs = require("fs"); // Filesystem access
 
-
-// Config
-var port = process.env.PORT || 8080;
-
+// Load config
+var config = require("./utils/config");
 
 // Setup the server
 var app = express(),
-    accessLogStream = fs.createWriteStream(__dirname + "/../../access.log", {flags: "a"});
+    accessLogStream = fs.createWriteStream(config.access_log, {flags: "a"});
 
 app.use(morgan("combined", {stream: accessLogStream}));
 app.use(bodyParser.json());
