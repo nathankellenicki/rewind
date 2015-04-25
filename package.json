@@ -5,7 +5,8 @@
   "description": "A personal timeline and distributed social network engine built in Javascript.",
   "scripts": {
     "start": "node ./main.js",
-    "test": "istanbul cover _mocha test"
+    "test": "istanbul cover _mocha test",
+    "postinstall": "gulp"
   },
   "dependencies": {
     "body-parser": "^1.10.2",
