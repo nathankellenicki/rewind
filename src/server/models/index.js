@@ -11,6 +11,7 @@ var config = require("../utils/config");
 // Setup the database
 var sequelize = new Sequelize(config.db.hostname, config.db.username, config.db.password, {
     dialect: config.db.engine,
+    post: config.db.port,
     storage: config.db.file
 });
 
