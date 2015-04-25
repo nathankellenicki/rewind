@@ -17,9 +17,6 @@ var optionTypeMapping = {
     "blog": UpdateFormConstants.OPTION_BLOG
 };
 
-// Setup vars
-var TransitionGroupContainer = React.addons.CSSTransitionGroup;
-
 
 // Exports
 var UpdateFormComponent = module.exports = React.createClass({
@@ -86,9 +83,7 @@ var UpdateFormComponent = module.exports = React.createClass({
         return (
             <form className="update_form" onSubmit={this.handleSubmit}>
                 <textarea placeholder="What's on your mind?" ref="text"></textarea>
-                <TransitionGroupContainer className="option_container" transitionName="sliding">
-                    {optionViews}
-                </TransitionGroupContainer>
+                {optionViews}
                 <div className="options">
                     <button className="location" onClick={this.handleOptionToggle}>Add Location</button>
                     <button className="image" onClick={this.handleOptionToggle}>Add Image</button>
