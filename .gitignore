@@ -1,7 +1,7 @@
 .idea
 .DS_Store
+static/dist/
 npm-debug.log
 node_modules
 access.log
 rewind.sqlite
-static/scripts/build/*

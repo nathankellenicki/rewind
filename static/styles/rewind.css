@@ -33,6 +33,7 @@ form.update_form textarea {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    outline-width: 0;
     border: 0;
 }
 
@@ -62,10 +63,32 @@ form.update_form div.options {
     color: #8897A7;
 }
 
+form.update_form div.location {
+    border-top: 1px solid #BBC9D1;
+}
+
+form.update_form div.location div.info {
+    padding: 10px;
+    color: #ADB6C1;
+}
+
+form.update_form div.location iframe.map {
+    width: 100%;
+    height: 200px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    border: 0;
+}
+
 form.update_form div.options button {
     position: relative;
     top: -4px;
     border: 0;
+    outline-width: 0;
     font-size: 0;
     line-height: 0;
     margin-right: 5px;
@@ -110,6 +133,7 @@ form.update_form input {
     background-color: #ED3148;
     width: 120px;
     height: 40px;
+    outline-width: 0;
     border: 0;
     font-size: 16px;
     font-weight: bold;
@@ -131,6 +155,24 @@ ul.updates_list li.update_box {
     margin-bottom: 20px;
     border: 1px solid #BBC9D1;
     border-radius: 3px;
+}
+
+ul.updates_list li.update_box.fading-enter {
+    opacity: 0.01;
+    transition: opacity 0.5s ease-in;
+}
+
+ul.updates_list li.update_box.fading-enter.fading-enter-active {
+    opacity: 1;
+}
+
+ul.updates_list li.update_box.fading-leave {
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+ul.updates_list li.update_box.fading-leave.fading-leave-active {
+    opacity: 0.01;
 }
 
 ul.updates_list li.update_box div.update {
@@ -159,6 +201,7 @@ ul.updates_list li.update_box div.options button.delete {
     left: 7px;
     top: 5px;
     border: 0;
+    outline-width: 0;
     font-size: 0;
     line-height: 0;
     background: url("../images/icons.png") -74px -2px no-repeat;

@@ -1,11 +1,8 @@
 "use strict";
 
-// Initialise Babel for ES6
-require("babel/register");
-
 // Include app and initialize models
-var app = require("./src/app"),
-    models = require("./src/models");
+var app = require("./src/server/app"),
+    models = require("./src/server/models");
 
 // Config
 app.set("port", process.env.PORT || 8080);
