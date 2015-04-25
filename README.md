@@ -1,8 +1,6 @@
 # Rewind - A personal timeline and distributed social network engine built in Node.js
-=======
 
 ## About
--------
 
 We use many different services on a day-to-day basis. Foursquare for check-ins, Twitter for small updates, Tumblr for larger blogposts - the list is endless, and they're all designed around sharing as much as possible. Sometimes you don't want to share your thoughts and feelings, you just want to record them.
   
@@ -11,7 +9,6 @@ Rewind is based around the concept of owning your own data. It's self hosted, so
 To see what Rewind looks like in it's current state, visit [Nathan Kunicki's Rewind blog](http://rewind.nathankunicki.com).
 
 ## Installation
--------
 
 Install Node.js v0.12.0 or above (Take a look at [nvm](https://github.com/creationix/nvm) for easy management of multiple versions of Node.js).
 
@@ -31,7 +28,6 @@ Install Node.js v0.12.0 or above (Take a look at [nvm](https://github.com/creati
 5. npm start
 
 ## Roadmap
--------
 
 Rewind is a living project. It's in early stages right now, but is being developed publicly and is open to contributions. This is the feature roadmap for the foreseeable future:
 
