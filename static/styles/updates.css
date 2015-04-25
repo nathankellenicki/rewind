@@ -1,25 +1,22 @@
-body {
-    background-color: #E9EAED;
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    color: #788499;
-}
-
 div.my_updates {
     position: relative;
-    top: 20px;
     left: 50%;
     width: 700px;
-    background-color: #FFFFFF;
+    background-color: #E9EAED;
     margin-left: -410px;
-    padding: 60px;
+    padding-top: 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 50px;
 }
 
 form.update_form {
     background-color: #FFFFFF;
-    margin-bottom: 20px;
-    border: 1px solid #BBC9D1;
-    border-radius: 3px;
+    margin-bottom: 10px;
+    border-left: 1px solid #DFE0E4;
+    border-top: 1px solid #DFE0E4;
+    border-right: 1px solid #BBC9D1;
+    border-bottom: 1px solid #BBC9D1;
 }
 
 form.update_form textarea {
@@ -64,7 +61,7 @@ form.update_form div.options {
 }
 
 form.update_form div.location {
-    border-top: 1px solid #BBC9D1;
+    border-top: 1px solid #E1E2E3;
 }
 
 form.update_form div.location div.info {
@@ -137,7 +134,6 @@ form.update_form input {
     border: 0;
     font-size: 16px;
     font-weight: bold;
-    border-radius: 3px;
 }
 
 form.update_form input:hover {
@@ -152,9 +148,11 @@ ul.updates_list {
 
 ul.updates_list li.update_box {
     background-color: #FFFFFF;
-    margin-bottom: 20px;
-    border: 1px solid #BBC9D1;
-    border-radius: 3px;
+    margin-bottom: 10px;
+    border-left: 1px solid #DFE0E4;
+    border-top: 1px solid #DFE0E4;
+    border-right: 1px solid #BBC9D1;
+    border-bottom: 1px solid #BBC9D1;
 }
 
 ul.updates_list li.update_box.fading-enter {

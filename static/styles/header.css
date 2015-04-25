@@ -1,0 +1,35 @@
+header#main_header {
+    background-color: #768498;
+    height: 46px;
+}
+
+div.header_container {
+    position: relative;
+    left: 50%;
+    width: 820px;
+    margin-left: -410px;
+
+}
+
+div.header_container div.user_details {
+    position: absolute;
+    right: 60px;
+    top: 10px;
+    color: #FFFFFF;
+}
+
+div.header_container div.user_details button {
+    color: #FFFFFF;
+    margin-left: 10px;
+    background-color: #ED3148;
+    width: 80px;
+    height: 26px;
+    outline-width: 0;
+    border: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+div.header_container div.user_details button:hover {
+    background-color: #CE2D42;
+}

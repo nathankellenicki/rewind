@@ -8,7 +8,8 @@ var React = require("react"),
     express = require("express");
 
 // Load React components (As factories)
-var YourUpdatesComponent = React.createFactory(require("../../shared/components/yourUpdates.jsx"));
+var YourUpdatesComponent = React.createFactory(require("../../shared/components/yourUpdates.jsx")),
+    HeaderComponent = React.createFactory(require("../../shared/components/header.jsx"));
 
 // Load controllers
 var UpdatesController = require("../controllers/updates"),
@@ -26,7 +27,9 @@ router.get("/", function (req, res, next) {
 
     updatesController.getRecentUpdates(startPoint).then(function (updates) {
 
-        var renderedMarkup = React.renderToString(YourUpdatesComponent({
+        var renderedHeaderMarkup = React.renderToString(HeaderComponent());
+
+        var renderedUpdateMarkup = React.renderToString(YourUpdatesComponent({
             url: "/api/updates",
             serverRenderedUpdates: updatesView({
                 updates: updates
@@ -34,7 +37,8 @@ router.get("/", function (req, res, next) {
         }));
 
         res.status(200).render("index", {
-            serverRenderedReactComponent: renderedMarkup
+            serverRenderedHeaderComponent: renderedHeaderMarkup,
+            serverRenderedYourUpdatesComponent: renderedUpdateMarkup
         });
         return next;
 
