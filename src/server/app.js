@@ -28,6 +28,7 @@ app.set("views", __dirname + "/templates");
 
 
 // Setup routes
+app.use("/api/authenticate", require("./routes/api/authentication.js")); // Authentication routes
 app.use("/api/updates", require("./routes/api/updates.js")); // My updates
 app.use("/", require("./routes/site.js")); // Site HTML and static files
 
