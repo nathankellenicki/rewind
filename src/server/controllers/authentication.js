@@ -19,7 +19,7 @@ module.exports = function () {
         var rand = Math.random() * 1000,
             date = +(new Date());
 
-        return crypto.createHash("sha512").update(rand + "" + date).digest("hex").substr(0, 128);
+        return crypto.createHash("sha512").update(rand * date).digest("hex");
 
     };
 
@@ -29,11 +29,11 @@ module.exports = function () {
             hash = password;
 
         while (i < 1000) {
-            hash = crypto.createHash("sha512").update(config.initial_salt + hash + salt + i).digest("hex");
+            hash = crypto.createHash("sha512").update(hash + salt).digest("hex");
             i++;
         }
 
-        return hash.substr(0, 128);
+        return hash;
 
     };
 
@@ -56,12 +56,11 @@ module.exports = function () {
                     if (user.password == hash) {
                         resolve(user);
                     } else {
-                        reject(true);
+                        reject("Incorrect username or password");
                     }
 
                 }).catch(function (err) {
-                    console.log("ok");
-                    console.log(err);
+                    reject(err);
                 });
 
             });
@@ -94,6 +93,8 @@ module.exports = function () {
 
                 }).then(function (result) {
                     resolve(result);
+                }).catch(function (err) {
+                    reject(err);
                 });
 
             });
