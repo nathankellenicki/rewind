@@ -3,7 +3,7 @@
   "username": "nathankunicki",
   "access_log": "./access.log",
   "url": "http://localhost:8080/",
-  "initial_salt": "34715595bd3a01a90965fa2fd4b190428d5f5f55a6b6166369ca4bd2f554a64e832add381450dd62cda34557a6afa88c6b7b732a469f48648edf86355affa09e",
+  "jwt_salt": "34715595bd3a01a90965fa2fd4b190428d5f5f55a6b6166369ca4bd2f554a64e832add381450dd62cda34557a6afa88c6b7b732a469f48648edf86355affa09e",
   "db": {
     "engine": "sqlite",
     "file": "./rewind.sqlite"

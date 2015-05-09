@@ -1,7 +1,8 @@
 "use strict";
 
 // Load dependencies
-var crypto = require("crypto");
+var crypto = require("crypto"),
+    jwt = require("jsonwebtoken");
 
 // Load config
 var config = require("../utils/config");
@@ -13,13 +14,27 @@ module.exports = function () {
     var KnownUser = require("../models").knownUser,
         LocalUser = require("../models").localUser;
 
+    // Create associations
+    LocalUser.belongsTo(KnownUser, {
+        foreignKey: "knownUserId"
+    });
+
+    var createJWT = function (username, email) {
+
+        return jwt.sign({
+            "username": username,
+            "email": email
+        }, config.jwt_salt);
+
+    };
+
 
     var createSalt = function () {
 
         var rand = Math.random() * 1000,
             date = +(new Date());
 
-        return crypto.createHash("sha512").update(rand * date).digest("hex");
+        return crypto.createHash("sha512").update(rand.toString() + date.toString()).digest("hex");
 
     };
 
@@ -39,22 +54,21 @@ module.exports = function () {
 
     return {
 
-        login: function (email, password) {
+        signin: function (email, password) {
 
             return new Promise(function (resolve, reject) {
 
                 LocalUser.findOne({
                     where: {
                         email: email
-                    }
+                    },
+                    include: [KnownUser]
                 }).then(function (user) {
-
-                    console.log(user);
 
                     var hash = secureHash(user.salt, password);
 
                     if (user.password == hash) {
-                        resolve(user);
+                        resolve(createJWT(user.knownUser.username, user.email));
                     } else {
                         reject("Incorrect username or password");
                     }
