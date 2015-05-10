@@ -19,15 +19,17 @@ module.exports = function () {
         foreignKey: "knownUserId"
     });
 
-    var createJWT = function (username, email) {
+    var createJWT = function (username, email, url) {
 
         return jwt.sign({
             "username": username,
-            "email": email
-        }, config.jwt_salt);
+            "email": email,
+            "url": url
+        }, config.jwt_salt, {
+            expiresInSeconds: (24 * 60 * 60) // 24 hours
+        });
 
     };
-
 
     var createSalt = function () {
 
@@ -54,7 +56,7 @@ module.exports = function () {
 
     return {
 
-        signin: function (email, password) {
+        signIn: function (email, password) {
 
             return new Promise(function (resolve, reject) {
 
@@ -68,7 +70,7 @@ module.exports = function () {
                     var hash = secureHash(user.salt, password);
 
                     if (user.password == hash) {
-                        resolve(createJWT(user.knownUser.username, user.email));
+                        resolve(createJWT(user.knownUser.username, user.email, user.knownUser.url));
                     } else {
                         reject("Incorrect username or password");
                     }
@@ -106,7 +108,7 @@ module.exports = function () {
                     return LocalUser.create(localUser);
 
                 }).then(function (result) {
-                    resolve(result);
+                    resolve(createJWT(username, email, url));
                 }).catch(function (err) {
                     reject(err);
                 });
