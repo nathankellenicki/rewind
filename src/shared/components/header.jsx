@@ -15,9 +15,6 @@ if (!CommonFunctions.isRunningOnServer()) {
     var AuthStore = require("../../client/stores/auth");
 }
 
-// Setup vars
-var loggedIn = false,
-    userDetails = {};
 
 // Exports
 var HeaderComponent = module.exports = React.createClass({
