@@ -68,8 +68,12 @@ updatesCollection.on("add change remove", UpdatesStore.emitChange.bind(UpdatesSt
 // Create a new update
 var create = function (text) {
 
+    var user = AuthStore.getUser();
+
     var update = new UpdateModel({
         timestamp: (new Date()).toISOString(),
+        username: user.username,
+        url: user.url,
         text: text
     });
 

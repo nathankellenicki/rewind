@@ -89,7 +89,7 @@ var UpdatesListComponent = module.exports = React.createClass({
             var update = this.state.updates.at(i);
             if (checkUpdateFormat(update)) {
                 updateNodes.push(
-                    <UpdateComponent key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")}>{update.get("text")}</UpdateComponent>
+                    <UpdateComponent key={update.get("id")} id={update.get("id")} timestamp={update.get("timestamp")} username={update.get("username")} url={update.get("url")}>{update.get("text")}</UpdateComponent>
                 );
             }
         }

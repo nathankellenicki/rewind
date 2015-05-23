@@ -4,6 +4,10 @@
 var crypto = require("crypto"),
     jwt = require("jsonwebtoken");
 
+// Load controllers
+var UserController = require("./user"),
+    userController = new UserController();
+
 // Load config
 var config = require("../utils/config");
 
@@ -60,17 +64,12 @@ module.exports = function () {
 
             return new Promise(function (resolve, reject) {
 
-                LocalUser.findOne({
-                    where: {
-                        email: email
-                    },
-                    include: [KnownUser]
-                }).then(function (user) {
+                userController.getUserByEmail(email).then(function (user) {
 
                     var hash = secureHash(user.salt, password);
 
                     if (user.password == hash) {
-                        resolve(createJWT(user.knownUser.username, user.email, user.knownUser.url));
+                        resolve(createJWT(user.username, user.email, user.url));
                     } else {
                         reject("Incorrect username or password");
                     }

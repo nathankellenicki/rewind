@@ -6,13 +6,15 @@ module.exports = function (sequelize, DataTypes) {
     // Create the model
     var Update = sequelize.define('update', {
         knownUserId: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            allowNull: false,
         },
         text: {
             type: DataTypes.STRING
         },
         timestamp: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            allowNull: false,
         }
     });
 

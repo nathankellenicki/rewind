@@ -20,6 +20,7 @@ var app = express(),
 app.use(morgan("combined", {stream: accessLogStream}));
 app.use(bodyParser.json());
 
+
 // Create the JWT middleware for parsing JWT tokens
 app.use(jwt({
     secret: config.jwt_salt,
@@ -38,6 +39,8 @@ app.use(jwt({
 
 }));
 
+
+// Load handlebars middleware
 app.engine("handlebars", exphbs({
     defaultLayout: "index",
     layoutsDir: __dirname + "/templates"

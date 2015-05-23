@@ -81,7 +81,7 @@ var UpdateComponent = module.exports = React.createClass({
 
     render: function () {
 
-        if (this.state.signedIn) {
+        if (this.state.signedIn && this.state.user.username == this.props.username) {
             var deleteButton = <button className="delete" onClick={this._handleDelete}>Delete</button>;
         } else {
             var deleteButton = null;
@@ -95,7 +95,7 @@ var UpdateComponent = module.exports = React.createClass({
                 <div className="options">
                     {deleteButton}
                     <div className="info">
-                        <span className="timestamp">{prettyDate(new Date(this.props.timestamp))}</span> by <span className="username"><a href="http://nathankunicki.com/rewind/">@nathankunicki</a></span>
+                        <span className="timestamp">{prettyDate(new Date(this.props.timestamp))}</span> by <span className="username"><a href={this.props.url}>@{this.props.username}</a></span>
                     </div>
                 </div>
             </li>

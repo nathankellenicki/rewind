@@ -6,6 +6,8 @@ module.exports = function (data) {
 
         id: update.id,
         text: update.text,
+        username: update.knownUser.username,
+        url: update.knownUser.url,
         timestamp: update.timestamp,
 
         get: function (prop) {

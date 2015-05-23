@@ -4,7 +4,13 @@
 module.exports = function () {
 
     // Load models
-    var UpdateModel = require("../models").update;
+    var UpdateModel = require("../models").update,
+        KnownUser = require("../models").knownUser;
+
+    // Create associations
+    UpdateModel.belongsTo(KnownUser, {
+        foreignKey: "knownUserId"
+    });
 
     return {
 
@@ -15,19 +21,38 @@ module.exports = function () {
             return new Promise(function (resolve, reject) {
 
                 UpdateModel.findAll({
-                    order: "timestamp DESC"
+                    order: "timestamp DESC",
+                    include: [KnownUser]
                 }).then(function (updates) {
                     resolve(updates);
                 });
 
             });
+
         },
 
-        createUpdate: function (text) {
+        getUpdate: function (id) {
+
+            return new Promise(function (resolve, reject) {
+
+                UpdateModel.findOne({
+                    where: {
+                        id: id
+                    }
+                }).then(function (update) {
+                    resolve(update);
+                });
+
+            });
+
+        },
+
+        createUpdate: function (userId, text) {
 
             return new Promise(function (resolve, reject) {
 
                 var update = {
+                    knownUserId: userId,
                     text: text,
                     timestamp: new Date()
                 };
