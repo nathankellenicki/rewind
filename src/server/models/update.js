@@ -5,6 +5,9 @@ module.exports = function (sequelize, DataTypes) {
 
     // Create the model
     var Update = sequelize.define('update', {
+        knownUserId: {
+            type: DataTypes.INTEGER
+        },
         text: {
             type: DataTypes.STRING
         },

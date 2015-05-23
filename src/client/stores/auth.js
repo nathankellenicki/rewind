@@ -28,7 +28,17 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         return store.user;
     },
 
-    emitEvent: function (event) {
+    constructAuthHeader: function () {
+        if (store.token) {
+            return {
+                "X-Rewind-Auth": store.token
+            };
+        } else {
+            return {};
+        }
+    },
+
+emitEvent: function (event) {
         console.log(event);
         this.emit(event);
     },

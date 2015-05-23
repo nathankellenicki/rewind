@@ -4,6 +4,7 @@
 require("log-timestamp"); // STDOUT timestamping
 
 var express = require("express"), // HTTP routing
+    jwt = require("express-jwt"), // JWT Express middleware
     exphbs  = require('express-handlebars'), // Express Handlebars rendering
     bodyParser = require("body-parser"), // For JSON body parsing
     morgan = require("morgan"), // Apache compatible access logging
@@ -18,6 +19,24 @@ var app = express(),
 
 app.use(morgan("combined", {stream: accessLogStream}));
 app.use(bodyParser.json());
+
+// Create the JWT middleware for parsing JWT tokens
+app.use(jwt({
+    secret: config.jwt_salt,
+    credentialsRequired: false,
+    requestProperty: "auth",
+
+    getToken: function (req) {
+
+        if (req.headers["X-Rewind-Auth".toLowerCase()]) {
+            return req.headers["X-Rewind-Auth".toLowerCase()];
+        } else {
+            return null;
+        }
+
+    }
+
+}));
 
 app.engine("handlebars", exphbs({
     defaultLayout: "index",

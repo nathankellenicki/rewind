@@ -11,6 +11,9 @@ var UpdateConstants = require("../constants/update");
 // Load models
 var UpdateModel = require("../models/update");
 
+// Load stores
+var AuthStore = require("../../client/stores/auth");
+
 // Constants
 var CHANGE_EVENT = "change";
 
@@ -71,7 +74,9 @@ var create = function (text) {
     });
 
     updatesCollection.add(update);
-    update.save();
+    update.save({}, {
+        headers: AuthStore.constructAuthHeader()
+    });
 
 };
 
@@ -79,7 +84,9 @@ var create = function (text) {
 // Destroy an existing update
 var destroy = function (id) {
     var update = updatesCollection.get(id);
-    update.destroy();
+    update.destroy({
+        headers: AuthStore.constructAuthHeader()
+    });
 };
 
 
@@ -92,7 +99,9 @@ var changeURL = function (url) {
 
 // Sync to the server
 var sync = function () {
-    updatesCollection.fetch();
+    updatesCollection.fetch({
+        headers: AuthStore.constructAuthHeader()
+    });
 };
 
 

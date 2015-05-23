@@ -11,6 +11,9 @@ var UpdatesController = require("../../controllers/updates"),
 var updateView = require("../../views/update"),
     updatesView = require("../../views/updates");
 
+// Load middleware
+var authMiddleware = require("../../utils/authMiddleware");
+
 // Setup routes
 var router = module.exports = express.Router();
 
@@ -34,7 +37,7 @@ router.get("/", function (req, res, next) {
 
 });
 
-router.post("/", function (req, res, next) {
+router.post("/", authMiddleware(), function (req, res, next) {
 
     var text = req.body["text"];
 
@@ -54,7 +57,7 @@ router.post("/", function (req, res, next) {
 
 });
 
-router.delete("/:id", function (req, res, next) {
+router.delete("/:id", authMiddleware(), function (req, res, next) {
 
     var id = req.params["id"];
 

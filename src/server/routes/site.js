@@ -1,7 +1,9 @@
 "use strict";
 
-// Intercept .jsx files to compile JSX
-require("node-jsx").install({extension: ".jsx"});
+// Intercept .jsx files to compile JSX with Babel
+require("babel/register")({
+    extensions: [".jsx"]
+});
 
 // Include dependencies
 var React = require("react"),
@@ -27,9 +29,8 @@ router.get("/", function (req, res, next) {
 
     updatesController.getRecentUpdates(startPoint).then(function (updates) {
 
-        var renderedHeaderMarkup = React.renderToString(HeaderComponent());
-
-        var renderedUpdateMarkup = React.renderToString(YourUpdatesComponent({
+        var renderedHeaderMarkup = React.renderToString(HeaderComponent()),
+            renderedUpdateMarkup = React.renderToString(YourUpdatesComponent({
             url: "/api/updates",
             serverRenderedUpdates: updatesView({
                 updates: updates
@@ -40,6 +41,7 @@ router.get("/", function (req, res, next) {
             serverRenderedHeaderComponent: renderedHeaderMarkup,
             serverRenderedYourUpdatesComponent: renderedUpdateMarkup
         });
+
         return next;
 
     }).catch(function (err) {
