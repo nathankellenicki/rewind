@@ -14,6 +14,9 @@ var UserController = require("../../controllers/user"),
 var updateView = require("../../views/update"),
     updatesView = require("../../views/updates");
 
+// Load constants
+var UpdateConstants = require("../../../shared/constants/update");
+
 // Load middleware
 var authMiddleware = require("../../middleware/auth");
 
@@ -22,9 +25,14 @@ var router = module.exports = express.Router();
 
 router.get("/", function (req, res, next) {
 
-    var startPoint = 0;
+    var startPoint = 0,
+        perms = [UpdateConstants.Permissions.PUBLIC];
 
-    updatesController.getRecentUpdates(startPoint).then(function (updates) {
+    if (req.auth && req.auth.perms) {
+        perms = req.auth.perms;
+    }
+
+    updatesController.getRecentUpdates(startPoint, perms).then(function (updates) {
 
         res.status(200).send(updatesView({
             updates: updates

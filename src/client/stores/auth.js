@@ -7,7 +7,7 @@ var EventEmitter = require("events").EventEmitter,
 var AppDispatcher = require("../appDispatcher");
 
 // Load constants
-var AuthConstants = require("../constants/auth");
+var AuthConstants = require("../../shared/constants/auth");
 
 
 // Store
@@ -38,8 +38,7 @@ var AuthStore = assign({}, EventEmitter.prototype, {
         }
     },
 
-emitEvent: function (event) {
-        console.log(event);
+    emitEvent: function (event) {
         this.emit(event);
     },
 
@@ -76,10 +75,10 @@ var signIn = function (email, password) {
             url: decoded.url
         };
 
-        AuthStore.emitEvent(AuthConstants.SIGN_IN_SUCCESS_EVENT);
+        AuthStore.emitEvent(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT);
 
     }).fail(function (err) {
-        AuthStore.emitEvent(AuthConstants.SIGN_IN_FAILED_EVENT);
+        AuthStore.emitEvent(AuthConstants.Events.SIGN_IN_FAILED_EVENT);
     })
 
 };
@@ -89,7 +88,7 @@ var signIn = function (email, password) {
 var signOut = function () {
     store.token = null;
     store.user = null;
-    AuthStore.emitEvent(AuthConstants.SIGN_OUT_EVENT);
+    AuthStore.emitEvent(AuthConstants.Events.SIGN_OUT_EVENT);
 };
 
 
@@ -102,12 +101,12 @@ AppDispatcher.register(function (action) {
 
     switch (action.actionType) {
 
-        case AuthConstants.SIGN_IN_ACTION:
+        case AuthConstants.Actions.SIGN_IN_ACTION:
 
             signIn(action.email, action.password);
             break;
 
-        case AuthConstants.SIGN_OUT_ACTION:
+        case AuthConstants.Actions.SIGN_OUT_ACTION:
 
             signOut();
             break;

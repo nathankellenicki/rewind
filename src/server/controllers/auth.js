@@ -8,6 +8,9 @@ var crypto = require("crypto"),
 var UserController = require("./user"),
     userController = new UserController();
 
+// Load constants
+var UpdateConstants = require("../../shared/constants/update");
+
 // Load config
 var config = require("../utils/config");
 
@@ -23,12 +26,21 @@ module.exports = function () {
         foreignKey: "knownUserId"
     });
 
-    var createJWT = function (username, email, url) {
+    var rootPermissions = function () {
+        return [
+            UpdateConstants.Permissions.PUBLIC,
+            UpdateConstants.Permissions.PRIVATE,
+            UpdateConstants.Permissions.FRIENDS
+        ];
+    };
+
+    var createJWT = function (username, email, url, permissions) {
 
         return jwt.sign({
             "username": username,
             "email": email,
-            "url": url
+            "url": url,
+            "perms": permissions
         }, config.jwt_salt, {
             expiresInSeconds: (24 * 60 * 60) // 24 hours
         });
@@ -69,7 +81,7 @@ module.exports = function () {
                     var hash = secureHash(user.salt, password);
 
                     if (user.password == hash) {
-                        resolve(createJWT(user.username, user.email, user.url));
+                        resolve(createJWT(user.username, user.email, user.url, rootPermissions()));
                     } else {
                         reject("Incorrect username or password");
                     }
@@ -87,27 +99,10 @@ module.exports = function () {
             return new Promise(function (resolve, reject) {
 
                 var salt = createSalt(),
-                    hash = secureHash(salt, password),
-                    url = config.url + username;
+                    hash = secureHash(salt, password);
 
-                var knownUser = {
-                    username: username,
-                    url: url
-                };
-
-                KnownUser.create(knownUser).then(function (result) {
-
-                    var localUser = {
-                        knownUserId: result.id,
-                        email: email,
-                        salt: salt,
-                        password: hash
-                    };
-
-                    return LocalUser.create(localUser);
-
-                }).then(function (result) {
-                    resolve(createJWT(username, email, url));
+                userController.createUser(email, username, salt, hash).then(function (user) {
+                    resolve(createJWT(username, email, user.url, rootPermissions()));
                 }).catch(function (err) {
                     reject(err);
                 });

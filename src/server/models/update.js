@@ -1,5 +1,8 @@
 "use strict";
 
+// Load constants
+var UpdateConstants = require("../../shared/constants/update");
+
 // Export interface
 module.exports = function (sequelize, DataTypes) {
 
@@ -7,14 +10,19 @@ module.exports = function (sequelize, DataTypes) {
     var Update = sequelize.define('update', {
         knownUserId: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
         text: {
             type: DataTypes.STRING
         },
+        visibility: {
+            type: DataTypes.INTEGER,
+            defaultValue: UpdateConstants.Permissions.PUBLIC,
+            allowNull: false
+        },
         timestamp: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: false
         }
     });
 

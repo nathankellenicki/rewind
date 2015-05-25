@@ -6,7 +6,8 @@ var EventEmitter = require("events").EventEmitter,
 var AppDispatcher = require("../appDispatcher");
 
 // Load constants
-var UpdateConstants = require("../constants/update");
+var AuthConstants = require("../../shared/constants/auth"),
+    UpdateConstants = require("../../shared/constants/update");
 
 // Load models
 var UpdateModel = require("../models/update");
@@ -109,6 +110,10 @@ var sync = function () {
 };
 
 
+// Watch the auth store for changes to resync
+AuthStore.addEventListener(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT, sync);
+AuthStore.addEventListener(AuthConstants.Events.SIGN_OUT_EVENT, sync);
+
 
 // Exports
 module.exports = UpdatesStore;
@@ -119,25 +124,25 @@ AppDispatcher.register(function (action) {
 
     switch (action.actionType) {
 
-        case UpdateConstants.UPDATE_CREATE:
+        case UpdateConstants.Actions.UPDATE_CREATE:
 
             create(action.text);
             UpdatesStore.emitChange();
             break;
 
-        case UpdateConstants.UPDATE_DESTROY:
+        case UpdateConstants.Actions.UPDATE_DESTROY:
 
             destroy(action.id);
             UpdatesStore.emitChange();
             break;
 
-        case UpdateConstants.CHANGE_URL:
+        case UpdateConstants.Actions.CHANGE_URL:
 
             changeURL(action.url);
             break;
 
 
-        case UpdateConstants.SYNC:
+        case UpdateConstants.Actions.SYNC:
 
             sync();
             break;

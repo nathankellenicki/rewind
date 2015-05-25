@@ -5,16 +5,16 @@ var React = require("react/addons");
 var UpdateActions = require("../../client/actions/update");
 
 // Load constants
-var UpdateFormConstants = require("../../client/constants/updateForm");
+var UpdateFormConstants = require("../constants/updateForm");
 
 // Load React components
 var UpdateFormLocationOption = require("./updateFormLocationOption.jsx");
 
 // This maps the below classNames to option constants
 var optionTypeMapping = {
-    "location": UpdateFormConstants.OPTION_LOCATION,
-    "image": UpdateFormConstants.OPTION_IMAGES,
-    "blog": UpdateFormConstants.OPTION_BLOG
+    "location": UpdateFormConstants.Types.OPTION_LOCATION,
+    "image": UpdateFormConstants.Types.OPTION_IMAGES,
+    "blog": UpdateFormConstants.Types.OPTION_BLOG
 };
 
 
@@ -74,7 +74,7 @@ var UpdateFormComponent = module.exports = React.createClass({
 
         var optionViews = [];
 
-        if (this._isOptionSet(UpdateFormConstants.OPTION_LOCATION)) {
+        if (this._isOptionSet(UpdateFormConstants.Types.OPTION_LOCATION)) {
             optionViews.push(
                 <UpdateFormLocationOption key={"location"} />
             );

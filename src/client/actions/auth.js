@@ -2,7 +2,7 @@
 var AppDispatcher = require("../appDispatcher");
 
 // Load constants
-var AuthConstants = require("../constants/auth");
+var AuthConstants = require("../../shared/constants/auth");
 
 
 // Exports
@@ -10,7 +10,7 @@ var AuthActions = module.exports = {
 
     signIn: function (email, password) {
         AppDispatcher.dispatch({
-            actionType: AuthConstants.SIGN_IN_ACTION,
+            actionType: AuthConstants.Actions.SIGN_IN_ACTION,
             email: email,
             password: password
         });
@@ -18,7 +18,7 @@ var AuthActions = module.exports = {
 
     signOut: function (email, password) {
         AppDispatcher.dispatch({
-            actionType: AuthConstants.SIGN_OUT_ACTION
+            actionType: AuthConstants.Actions.SIGN_OUT_ACTION
         });
     }
 

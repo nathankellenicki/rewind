@@ -5,7 +5,7 @@ var React = require("react/addons");
 var UpdateActions = require("../../client/actions/update");
 
 // Load constants
-var AuthConstants = require("../../client/constants/auth");
+var AuthConstants = require("../constants/auth");
 
 // Load utilities
 var CommonFunctions = require("../utils/commonFunctions");
@@ -60,8 +60,8 @@ var UpdateComponent = module.exports = React.createClass({
 
         var ref = this;
 
-        AuthStore.addEventListener(AuthConstants.SIGN_IN_SUCCESS_EVENT, this._onSignInOutSuccess);
-        AuthStore.addEventListener(AuthConstants.SIGN_OUT_EVENT, this._onSignInOutSuccess);
+        AuthStore.addEventListener(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT, this._onSignInOutSuccess);
+        AuthStore.addEventListener(AuthConstants.Events.SIGN_OUT_EVENT, this._onSignInOutSuccess);
 
         // We force an update every so often in order to keep displayed date/times relatively up to date
         this.renderTimer = setInterval(function () {
@@ -72,8 +72,8 @@ var UpdateComponent = module.exports = React.createClass({
 
     componentWillUnmount: function () {
 
-        AuthStore.removeEventListener(AuthConstants.SIGN_IN_SUCCESS_EVENT, this._onSignInOutSuccess);
-        AuthStore.removeEventListener(AuthConstants.SIGN_OUT_EVENT, this._onSignInOutSuccess);
+        AuthStore.removeEventListener(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT, this._onSignInOutSuccess);
+        AuthStore.removeEventListener(AuthConstants.Events.SIGN_OUT_EVENT, this._onSignInOutSuccess);
 
         clearInterval(this.renderTimer);
 

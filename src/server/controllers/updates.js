@@ -14,7 +14,7 @@ module.exports = function () {
 
     return {
 
-        getRecentUpdates: function (startPoint) {
+        getRecentUpdates: function (startPoint, types) {
 
             startPoint = startPoint || 0;
 
@@ -22,6 +22,9 @@ module.exports = function () {
 
                 UpdateModel.findAll({
                     order: "timestamp DESC",
+                    where: {
+                        visibility: types
+                    },
                     include: [KnownUser]
                 }).then(function (updates) {
                     resolve(updates);

@@ -2,7 +2,7 @@
 var React = require("react/addons");
 
 // Load constants
-var UpdateFormConstants = require("../../client/constants/updateForm");
+var UpdateFormConstants = require("../constants/updateForm");
 
 // Load utility functions
 var getCurrentLocation = require("../../client/utils/getCurrentLocation");
