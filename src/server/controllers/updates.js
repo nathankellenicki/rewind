@@ -1,5 +1,8 @@
 "use strict";
 
+// Load constants
+var UpdateConstants = require("../../shared/constants/update");
+
 // Export interface
 module.exports = function () {
 
@@ -23,7 +26,7 @@ module.exports = function () {
                 UpdateModel.findAll({
                     order: "timestamp DESC",
                     where: {
-                        visibility: types
+                        visibility: types || [UpdateConstants.Permissions.PUBLIC]
                     },
                     include: [KnownUser]
                 }).then(function (updates) {
