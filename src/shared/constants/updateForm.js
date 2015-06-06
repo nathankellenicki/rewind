@@ -6,6 +6,7 @@ module.exports = {
         OPTION_LOCATION: null,
         OPTION_IMAGES: null,
         OPTION_BLOG: null,
+        OPTION_VISIBILITY: null,
         VISIBILITY_PUBLIC: null,
         VISIBILITY_FRIENDS: null,
         VISIBILITY_PRIVATE: null,

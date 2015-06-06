@@ -91,9 +91,47 @@ form.update_form div.options button {
     margin-right: 5px;
 }
 
+form.update_form div.options button.visibility {
+    position: absolute;
+    top: 21px;
+    left: 7px;
+    background: url("../images/icons.png") -188px -2px no-repeat;
+    background-size: 220px 50px;
+    width: 31px;
+    height: 24px;
+}
+
+form.update_form div.options button.visibility:hover {
+    background-position: -188px -25px;
+}
+
+form.update_form div.options div.visibility_box {
+    text-align: left;
+    z-index: 9999;
+    background-color: #FFFFFF;
+    position: absolute;
+    top: 32px;
+    left: 25px;
+    width: 150px;
+    border-left: 1px solid #DFE0E4;
+    border-top: 1px solid #DFE0E4;
+    border-right: 1px solid #BBC9D1;
+    border-bottom: 1px solid #BBC9D1;
+}
+
+form.update_form div.options div.visibility_box ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+form.update_form div.options div.visibility_box ul li {
+    padding: 10px;
+}
+
 form.update_form div.options button.location {
     background: url("../images/icons.png") -1px -2px no-repeat;
-    background-size: 200px 50px;
+    background-size: 220px 50px;
     width: 24px;
     height: 24px;
 }
@@ -103,25 +141,25 @@ form.update_form div.options button.location:hover {
 }
 
 form.update_form div.options button.image {
-    background: url("../images/icons.png") -25.5px -2px no-repeat;
-    background-size: 200px 50px;
+    background: url("../images/icons.png") -24.5px -2px no-repeat;
+    background-size: 220px 50px;
     width: 24px;
     height: 24px;
 }
 
 form.update_form div.options button.image:hover {
-    background-position: -25.5px -24.6px;
+    background-position: -24.5px -24.6px;
 }
 
 form.update_form div.options button.blog {
-    background: url("../images/icons.png") -51px -2px no-repeat;
-    background-size: 200px 50px;
+    background: url("../images/icons.png") -49px -2px no-repeat;
+    background-size: 220px 50px;
     width: 24px;
     height: 24px;
 }
 
 form.update_form div.options button.blog:hover {
-    background-position: -51px -24px;
+    background-position: -49px -24px;
 }
 
 form.update_form input {
@@ -202,14 +240,14 @@ ul.updates_list li.update_box div.options button.delete {
     outline-width: 0;
     font-size: 0;
     line-height: 0;
-    background: url("../images/icons.png") -74px -2px no-repeat;
-    background-size: 200px 50px;
+    background: url("../images/icons.png") -72px -2px no-repeat;
+    background-size: 220px 50px;
     width: 24px;
     height: 24px;
 }
 
 ul.updates_list li.update_box div.options button.delete:hover {
-    background-position: -74px -23px;
+    background-position: -72px -23px;
 }
 
 ul.updates_list li.update_box div.options div.info a {

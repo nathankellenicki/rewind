@@ -5,16 +5,25 @@ var React = require("react/addons");
 var UpdateActions = require("../../client/actions/update");
 
 // Load constants
-var UpdateFormConstants = require("../constants/updateForm");
+var UpdateFormConstants = require("../constants/updateForm"),
+    UpdateContants = require("../constants/update");
 
 // Load React components
-var UpdateFormLocationOption = require("./updateFormLocationOption.jsx");
+var UpdateFormLocationOption = require("./updateFormLocationOption.jsx"),
+    UpdateFormVisibilityPopup = require("./updateFormVisibilityPopup.jsx");
 
 // This maps the below classNames to option constants
 var optionTypeMapping = {
     "location": UpdateFormConstants.Types.OPTION_LOCATION,
     "image": UpdateFormConstants.Types.OPTION_IMAGES,
-    "blog": UpdateFormConstants.Types.OPTION_BLOG
+    "blog": UpdateFormConstants.Types.OPTION_BLOG,
+    "visibility": UpdateFormConstants.Types.OPTION_VISIBILITY
+};
+
+var visibilityTypeMapping = {
+    "public": UpdateContants.Permissions.PUBLIC,
+    "friends": UpdateContants.Permissions.FRIENDS,
+    "private": UpdateContants.Permissions.PRIVATE
 };
 
 
@@ -22,7 +31,8 @@ var optionTypeMapping = {
 var UpdateFormComponent = module.exports = React.createClass({
 
     _viewState: {
-        options: []
+        options: [],
+        visibility: UpdateContants.Permissions.PUBLIC
     },
 
     _toggleUpdateOption: function (option) {
@@ -50,14 +60,20 @@ var UpdateFormComponent = module.exports = React.createClass({
     handleSubmit: function (e) {
 
         e.preventDefault();
-        var text = React.findDOMNode(this.refs.text).value.trim();
+        var text = React.findDOMNode(this.refs.text).value.trim(),
+            visibility = this.state.visibility;
 
         if (!text) {
             return;
         }
 
-        UpdateActions.create(text);
+        UpdateActions.create(text, visibility);
+
+        // Reset everything
         React.findDOMNode(this.refs.text).value = "";
+        this._viewState.visibility = UpdateContants.Permissions.PUBLIC;
+        this._viewState.options = [];
+        this.setState(this._viewState);
 
     },
 
@@ -66,17 +82,31 @@ var UpdateFormComponent = module.exports = React.createClass({
         this._toggleUpdateOption(optionTypeMapping[e.target.className]);
     },
 
+    setVisibility: function (e) {
+        e.preventDefault();
+        this._viewState.visibility = visibilityTypeMapping[e.target.parentNode.className];
+        this.setState(this._viewState);
+        this._toggleUpdateOption(UpdateFormConstants.Types.OPTION_VISIBILITY);
+    },
+
     getInitialState: function () {
         return this._viewState;
     },
 
     render: function () {
 
-        var optionViews = [];
+        var optionViews = [],
+            popupViews = [];
 
         if (this._isOptionSet(UpdateFormConstants.Types.OPTION_LOCATION)) {
             optionViews.push(
-                <UpdateFormLocationOption key={"location"} />
+                <UpdateFormLocationOption key="location" />
+            );
+        }
+
+        if (this._isOptionSet(UpdateFormConstants.Types.OPTION_VISIBILITY)) {
+            popupViews.push(
+                <UpdateFormVisibilityPopup setVisibility={this.setVisibility} />
             );
         }
 
@@ -85,6 +115,8 @@ var UpdateFormComponent = module.exports = React.createClass({
                 <textarea placeholder="What's on your mind?" ref="text"></textarea>
                 {optionViews}
                 <div className="options">
+                    {popupViews}
+                    <button className="visibility" onClick={this.handleOptionToggle}>Visibility Settings</button>
                     <button className="location" onClick={this.handleOptionToggle}>Add Location</button>
                     <button className="image" onClick={this.handleOptionToggle}>Add Image</button>
                     <button className="blog" onClick={this.handleOptionToggle}>Add Blog</button>

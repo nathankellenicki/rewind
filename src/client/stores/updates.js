@@ -67,7 +67,7 @@ updatesCollection.on("add change remove", UpdatesStore.emitChange.bind(UpdatesSt
 
 
 // Create a new update
-var create = function (text) {
+var create = function (text, visibility) {
 
     var user = AuthStore.getUser();
 
@@ -75,7 +75,8 @@ var create = function (text) {
         timestamp: (new Date()).toISOString(),
         username: user.username,
         url: user.url,
-        text: text
+        text: text,
+        visibility: visibility
     });
 
     updatesCollection.add(update);
@@ -126,7 +127,7 @@ AppDispatcher.register(function (action) {
 
         case UpdateConstants.Actions.UPDATE_CREATE:
 
-            create(action.text);
+            create(action.text, action.visibility);
             UpdatesStore.emitChange();
             break;
 

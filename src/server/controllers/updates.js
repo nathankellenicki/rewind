@@ -53,13 +53,14 @@ module.exports = function () {
 
         },
 
-        createUpdate: function (userId, text) {
+        createUpdate: function (userId, text, visibility) {
 
             return new Promise(function (resolve, reject) {
 
                 var update = {
                     knownUserId: userId,
                     text: text,
+                    visibility: visibility,
                     timestamp: new Date()
                 };
 

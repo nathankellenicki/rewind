@@ -8,10 +8,11 @@ var UpdateConstants = require("../../shared/constants/update");
 // Exports
 var UpdateActions = module.exports = {
 
-  create: function (text) {
+  create: function (text, visibility) {
       AppDispatcher.dispatch({
           actionType: UpdateConstants.Actions.UPDATE_CREATE,
-          text: text
+          text: text,
+          visibility: visibility
       });
   },
 

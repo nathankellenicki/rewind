@@ -50,11 +50,12 @@ router.get("/", function (req, res, next) {
 
 router.post("/", authMiddleware(), function (req, res, next) {
 
-    var text = req.body["text"];
+    var text = req.body["text"],
+        visibility = req.body["visibility"];
 
     userController.getUserByEmail(req.auth.email).then(function (user) {
 
-        return updatesController.createUpdate(user.id, text);
+        return updatesController.createUpdate(user.id, text, visibility);
 
     }).then(function (update) {
 
