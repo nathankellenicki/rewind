@@ -77,8 +77,6 @@ var UpdateFormLocationOptionComponent = module.exports = React.createClass({
 
             case UpdateFormConstants.Types.LOCATION_FETCHING:
 
-                console.log("fine");
-
                 return (
                     <div className="location fetching">
                         <div className="info">Fetching location...</div>
@@ -86,8 +84,6 @@ var UpdateFormLocationOptionComponent = module.exports = React.createClass({
                 );
 
             case UpdateFormConstants.Types.LOCATION_DISCOVERING:
-
-                console.log("Right");
 
                 return (
                     <div className="location discovering">
