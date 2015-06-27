@@ -25,14 +25,14 @@ var router = module.exports = express.Router();
 
 router.get("/", function (req, res, next) {
 
-    var startPoint = 0,
+    var pageNumber = req.query["page"] || 0,
         perms = [UpdateConstants.Permissions.PUBLIC];
 
     if (req.auth && req.auth.perms) {
         perms = req.auth.perms;
     }
 
-    updatesController.getRecentUpdates(startPoint, perms).then(function (updates) {
+    updatesController.getRecentUpdates(pageNumber, perms).then(function (updates) {
 
         res.status(200).send(updatesView({
             updates: updates

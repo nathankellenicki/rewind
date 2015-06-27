@@ -257,3 +257,18 @@ ul.updates_list li.update_box div.options div.info a {
 ul.updates_list li.update_box div.options div.info a:hover {
     color: #788499;
 }
+
+div.paging button.page_button {
+    color: #FFFFFF;
+    background-color: #ED3148;
+    width: 100%;
+    height: 33px;
+    outline-width: 0;
+    border: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+div.paging button.page_button:hover {
+    background-color: #CE2D42;
+}

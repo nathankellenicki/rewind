@@ -34,6 +34,12 @@ var UpdateActions = module.exports = {
       AppDispatcher.dispatch({
           actionType: UpdateConstants.Actions.SYNC
       });
+  },
+
+  page: function () {
+      AppDispatcher.dispatch({
+          actionType: UpdateConstants.Actions.PAGE
+      });
   }
 
 };

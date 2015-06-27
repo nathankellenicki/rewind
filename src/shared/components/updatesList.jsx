@@ -59,20 +59,23 @@ var UpdatesListComponent = module.exports = React.createClass({
         this.setState(this._constructState());
     },
 
+    pageMoreItems: function () {
+        UpdateActions.page();
+    },
+
     componentDidMount: function () {
         UpdatesStore.addChangeListener(this._onChange);
 
         UpdateActions.sync();
 
-        syncTimer = setInterval(function () {
-            UpdateActions.sync();
-        }, fetchInterval);
-
+        //syncTimer = setInterval(function () {
+        //    UpdateActions.sync();
+        //}, fetchInterval);
     },
 
     componentWillUnmount: function () {
         UpdatesStore.removeChangeListener(this._onChange);
-        clearInterval(syncTimer);
+        //clearInterval(syncTimer);
         syncTimer = null;
     },
 
@@ -95,9 +98,14 @@ var UpdatesListComponent = module.exports = React.createClass({
         }
 
         return (
-            <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading">
-                {updateNodes}
-            </TransitionGroupContainer>
+            <div className="updates">
+                <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading">
+                    {updateNodes}
+                </TransitionGroupContainer>
+                <div className="paging">
+                    <button className="page_button" onClick={this.pageMoreItems}>More Items</button>
+                </div>
+            </div>
         );
 
     }

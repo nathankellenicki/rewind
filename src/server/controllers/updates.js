@@ -3,6 +3,8 @@
 // Load constants
 var UpdateConstants = require("../../shared/constants/update");
 
+var PAGE_SIZE = 20;
+
 // Export interface
 module.exports = function () {
 
@@ -17,9 +19,11 @@ module.exports = function () {
 
     return {
 
-        getRecentUpdates: function (startPoint, types) {
+        getRecentUpdates: function (pageNumber, types) {
 
-            startPoint = startPoint || 0;
+            pageNumber = pageNumber || 0;
+
+            console.log(pageNumber);
 
             return new Promise(function (resolve, reject) {
 
@@ -28,6 +32,8 @@ module.exports = function () {
                     where: {
                         visibility: types || [UpdateConstants.Permissions.PUBLIC]
                     },
+                    limit: PAGE_SIZE,
+                    offset: (pageNumber * PAGE_SIZE),
                     include: [KnownUser]
                 }).then(function (updates) {
                     resolve(updates);

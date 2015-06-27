@@ -110,6 +110,25 @@ var sync = function () {
     });
 };
 
+// Sync to the server
+var currentPage = 0;
+
+var page = function () {
+
+    currentPage++;
+
+    updatesCollection.fetch({
+        headers: AuthStore.constructAuthHeader(),
+        add: true,
+        remove: false,
+        merge: false,
+        data: {
+            page: currentPage
+        }
+    });
+
+};
+
 
 // Watch the auth store for changes to resync
 AuthStore.addEventListener(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT, sync);
@@ -146,6 +165,11 @@ AppDispatcher.register(function (action) {
         case UpdateConstants.Actions.SYNC:
 
             sync();
+            break;
+
+        case UpdateConstants.Actions.PAGE:
+
+            page();
             break;
 
         default:
