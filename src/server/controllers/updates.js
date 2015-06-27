@@ -23,8 +23,6 @@ module.exports = function () {
 
             pageNumber = pageNumber || 0;
 
-            console.log(pageNumber);
-
             return new Promise(function (resolve, reject) {
 
                 UpdateModel.findAll({
