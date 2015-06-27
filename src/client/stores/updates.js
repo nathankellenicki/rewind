@@ -109,9 +109,13 @@ var changeURL = function (url) {
 
 // Sync to the server
 var sync = function () {
+
+    currentPage = 0;
+
     updatesCollection.fetch({
         headers: AuthStore.constructAuthHeader()
     });
+
 };
 
 // Go to next page
