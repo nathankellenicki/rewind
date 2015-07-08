@@ -53,6 +53,52 @@ var AuthStore = assign({}, EventEmitter.prototype, {
 });
 
 
+// Given a JWT, check if it's expired (But don't verify!)
+var isJWTExpired = function (token) {
+
+    var completeDecoded = jwt.decode(token, {
+        complete: true
+    });
+
+    return (completeDecoded.exp <= +((new Date()) / 1000));
+
+};
+
+
+// Given a JWT, extract the user details
+var extractUserDetailsFromJWT = function (token) {
+
+    var decoded = jwt.decode(token);
+
+    return {
+        username: decoded.username,
+        email: decoded.email,
+        url: decoded.url
+    }
+
+};
+
+
+// Initialize the store based on a stored token
+var initialize = function () {
+
+    var token = localStorage.getItem("rewind::auth-token");
+
+    if (token) {
+
+        if (!isJWTExpired(token)) {
+
+            store.token = token;
+            store.user = extractUserDetailsFromJWT(token);
+
+        } else {
+            localStorage.removeItem("rewind::auth-token");
+        }
+    }
+
+};
+
+
 // Sign in
 var signIn = function (email, password) {
 
@@ -69,12 +115,9 @@ var signIn = function (email, password) {
         var decoded = jwt.decode(data.jwt);
 
         store.token = data.jwt;
-        store.user = {
-            username: decoded.username,
-            email: decoded.email,
-            url: decoded.url
-        };
+        store.user = extractUserDetailsFromJWT(data.jwt);
 
+        localStorage.setItem("rewind::auth-token", data.jwt);
         AuthStore.emitEvent(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT);
 
     }).fail(function (err) {
@@ -86,10 +129,18 @@ var signIn = function (email, password) {
 
 // Sign Out
 var signOut = function () {
+
     store.token = null;
     store.user = null;
+
+    localStorage.removeItem("rewind::auth-token");
     AuthStore.emitEvent(AuthConstants.Events.SIGN_OUT_EVENT);
+
 };
+
+
+// Initialize the store from localStorage
+initialize();
 
 
 // Exports

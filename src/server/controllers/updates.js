@@ -3,7 +3,8 @@
 // Load constants
 var UpdateConstants = require("../../shared/constants/update");
 
-var PAGE_SIZE = 20;
+var PAGE_SIZE = 20,
+    MAX_CHARS = 140;
 
 // Export interface
 module.exports = function () {
@@ -63,7 +64,7 @@ module.exports = function () {
 
                 var update = {
                     knownUserId: userId,
-                    text: text,
+                    text: text.substr(0, MAX_CHARS),
                     visibility: visibility,
                     timestamp: new Date()
                 };

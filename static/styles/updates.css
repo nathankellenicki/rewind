@@ -93,7 +93,7 @@ form.update_form div.options button {
 
 form.update_form div.options button.visibility {
     position: absolute;
-    top: 21px;
+    top: 20px;
     left: 7px;
     background: url("../images/icons.png") -188px -2px no-repeat;
     background-size: 220px 50px;
@@ -127,6 +127,17 @@ form.update_form div.options div.visibility_box ul {
 
 form.update_form div.options div.visibility_box ul li {
     padding: 10px;
+}
+
+form.update_form div.options div.char_count {
+    position: absolute;
+    font-size: 16px;
+    top: 22px;
+    left: 40px;
+}
+
+form.update_form div.options div.char_count.exceeded {
+    color: #ED3148;
 }
 
 form.update_form div.options button.location {
@@ -178,6 +189,10 @@ form.update_form input:hover {
     background-color: #CE2D42;
 }
 
+form.update_form input:disabled {
+    background-color: #8697A6;
+}
+
 ul.updates_list {
     list-style-type: none;
     padding: 0;
@@ -213,6 +228,7 @@ ul.updates_list li.update_box.fading-leave.fading-leave-active {
 
 ul.updates_list li.update_box div.update {
     padding: 10px;
+    word-wrap: break-word;
 }
 
 ul.updates_list li.update_box div.options {

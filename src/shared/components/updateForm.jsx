@@ -12,6 +12,9 @@ var UpdateFormConstants = require("../constants/updateForm"),
 var UpdateFormLocationOption = require("./updateFormLocationOption.jsx"),
     UpdateFormVisibilityPopup = require("./updateFormVisibilityPopup.jsx");
 
+
+var MAX_CHARS = 140;
+
 // This maps the below classNames to option constants
 var optionTypeMapping = {
     "location": UpdateFormConstants.Types.OPTION_LOCATION,
@@ -32,6 +35,7 @@ var UpdateFormComponent = module.exports = React.createClass({
 
     _viewState: {
         options: [],
+        charCount: 0,
         visibility: UpdateContants.Permissions.PUBLIC
     },
 
@@ -71,6 +75,7 @@ var UpdateFormComponent = module.exports = React.createClass({
 
         // Reset everything
         React.findDOMNode(this.refs.text).value = "";
+        this._viewState.charCount = 0;
         this._viewState.visibility = UpdateContants.Permissions.PUBLIC;
         this._viewState.options = [];
         this.setState(this._viewState);
@@ -80,6 +85,12 @@ var UpdateFormComponent = module.exports = React.createClass({
     handleOptionToggle: function (e) {
         e.preventDefault();
         this._toggleUpdateOption(optionTypeMapping[e.target.className]);
+    },
+
+    handleCharChange: function (e) {
+        e.preventDefault();
+        this._viewState.charCount = React.findDOMNode(this.refs.text).value.length;
+        this.setState(this._viewState);
     },
 
     setVisibility: function (e) {
@@ -96,7 +107,9 @@ var UpdateFormComponent = module.exports = React.createClass({
     render: function () {
 
         var optionViews = [],
-            popupViews = [];
+            popupViews = [],
+            charCountClass = "char_count",
+            isExceeded = false;
 
         if (this._isOptionSet(UpdateFormConstants.Types.OPTION_LOCATION)) {
             optionViews.push(
@@ -110,17 +123,23 @@ var UpdateFormComponent = module.exports = React.createClass({
             );
         }
 
+        if (this.state.charCount > MAX_CHARS) {
+            charCountClass += " exceeded";
+            isExceeded = true;
+        }
+
         return (
             <form className="update_form" onSubmit={this.handleSubmit}>
-                <textarea placeholder="What's on your mind?" ref="text"></textarea>
+                <textarea placeholder="What's on your mind?" ref="text" onChange={this.handleCharChange}></textarea>
                 {optionViews}
                 <div className="options">
                     {popupViews}
+                    <div className={charCountClass}>{(MAX_CHARS - this.state.charCount)}</div>
                     <button className="visibility" onClick={this.handleOptionToggle}>Visibility Settings</button>
                     <button className="location" onClick={this.handleOptionToggle}>Add Location</button>
                     <button className="image" onClick={this.handleOptionToggle}>Add Image</button>
                     <button className="blog" onClick={this.handleOptionToggle}>Add Blog</button>
-                    <input type="submit" value="Post" />
+                    <input type="submit" value="Post" disabled={isExceeded} />
                 </div>
             </form>
         );
