@@ -16,11 +16,37 @@ if (!CommonFunctions.isRunningOnServer()) {
 }
 
 // Load utility functions
-var prettyDate = require("../utils/prettyDate");
+var prettyDate = require("../utils/prettyDate"),
+    Autolinker = require("autolinker", {
+        className: "autolink",
+        hashtag: true,
+        replaceFn: function (autolinker, match) {
+
+            console.log(match.getType());
+
+            switch (match.getType()) {
+                case "hashtag":
+                    var tag = match.getHashtag();
+                    return "<a href=\"/hashtag/" + hashtag + "\">" + hashtag + "</a>";
+            }
+
+        }
+    });
+
+// Instantiate classes
+var autolinker = new Autolinker();
 
 // Setup vars
 var renderTimer,
     renderInterval = 30000;
+
+
+// Takes a string containing valid HTML and wraps it in an object to be passed to React's dangerouslySetInnerHTML call
+var wrapDangerousHTML = function (htmlStr) {
+    return {
+        __html: htmlStr
+    }
+};
 
 
 // Exports
@@ -90,7 +116,7 @@ var UpdateComponent = module.exports = React.createClass({
         return (
             <li className="update_box">
                 <div className="update">
-                    <span className="content">{this.props.children}</span>
+                    <span className="content" dangerouslySetInnerHTML={wrapDangerousHTML(autolinker.link(this.props.children))}></span>
                 </div>
                 <div className="options">
                     {deleteButton}

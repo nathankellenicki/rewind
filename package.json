@@ -8,6 +8,7 @@
     "test": "istanbul cover _mocha test"
   },
   "dependencies": {
+    "autolinker": "^0.18.1",
     "babel": "^5.4.7",
     "body-parser": "^1.10.2",
     "express": "^4.11.2",
