@@ -17,24 +17,27 @@ if (!CommonFunctions.isRunningOnServer()) {
 
 // Load utility functions
 var prettyDate = require("../utils/prettyDate"),
-    Autolinker = require("autolinker", {
-        className: "autolink",
-        hashtag: true,
-        replaceFn: function (autolinker, match) {
-
-            console.log(match.getType());
-
-            switch (match.getType()) {
-                case "hashtag":
-                    var tag = match.getHashtag();
-                    return "<a href=\"/hashtag/" + hashtag + "\">" + hashtag + "</a>";
-            }
-
-        }
-    });
+    Autolinker = require("autolinker");
 
 // Instantiate classes
-var autolinker = new Autolinker();
+var autolinker = new Autolinker({
+    className: "autolink",
+    twitter: false,
+    urls: true,
+    hashtag: "twitter",
+    replaceFn: function (autolinker, match) {
+
+        console.log(match.getType());
+
+        switch (match.getType()) {
+            case "hashtag":
+                console.log("Doing");
+                var hashtag = match.getHashtag();
+                return "<a href=\"/hashtag/" + hashtag + "\">&#x23;" + hashtag + "</a>";
+        }
+
+    }
+});
 
 // Setup vars
 var renderTimer,
