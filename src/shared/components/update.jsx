@@ -27,11 +27,8 @@ var autolinker = new Autolinker({
     hashtag: "twitter",
     replaceFn: function (autolinker, match) {
 
-        console.log(match.getType());
-
         switch (match.getType()) {
             case "hashtag":
-                console.log("Doing");
                 var hashtag = match.getHashtag();
                 return "<a href=\"/hashtag/" + hashtag + "\">&#x23;" + hashtag + "</a>";
         }
