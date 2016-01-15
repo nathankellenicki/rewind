@@ -1,59 +1,60 @@
 var gulp = require("gulp"),
-    source = require("vinyl-source-stream"),
-    buffer = require("vinyl-buffer"),
-    browserify = require("browserify"),
-    uglify = require("gulp-uglify"),
-    watchify = require("watchify"),
-    reactify = require("reactify"),
-    concat = require("gulp-concat");
+    webpackStream = require("webpack-stream"),
+    webpack = require("webpack"),
+    named = require("vinyl-named");
 
 gulp.task("watch", function () {
 
-    var bundler = browserify({
-        entries: ["./src/client/main.js"],
-        transform: [reactify],
-        debug: true,
-        cache: {},
-        packageCache: {}
-    });
-
-    var watcher = watchify(bundler);
-
-    return watcher
-        .on("update", function () {
-
-            var updateStart = Date.now();
-
-            console.log('Change detected, updating');
-            watcher.bundle()
-                .pipe(source("main.js"))
-                .pipe(gulp.dest("./static/dist/"));
-
-            console.log('Updated in', (Date.now() - updateStart) + 'ms');
-
-        })
-        .bundle()
-        .pipe(source("main.js"))
-        .pipe(gulp.dest("./static/dist/"));
+    return gulp.src(["src/client/main.js"])
+        .pipe(named())
+        .pipe(webpackStream({
+            watch: true,
+            devtool: "source-map",
+            module: {
+                loaders: [{
+                    test: /\.jsx?$/,
+                    exclude: /(node_modules|bower_components)/,
+                    loader: "babel",
+                    query: {
+                        presets: ["react"]
+                    }
+                }]
+            },
+            plugins: [
+                new webpack.optimize.CommonsChunkPlugin("common.js")
+            ]
+        }))
+        .pipe(gulp.dest("static/dist"));
 
 });
 
 gulp.task("build", function () {
 
-    var bundler = browserify({
-        entries: ["./src/client/main.js"],
-        transform: [reactify],
-        debug: true,
-        cache: {},
-        packageCache: {}
-    });
-
-    bundler.bundle()
-        .pipe(source("main.js"))
-        .pipe(buffer())
-        .pipe(uglify())
-        .pipe(gulp.dest("./static/dist/"));
+    return gulp.src(["src/client/main.js"])
+        .pipe(named())
+        .pipe(webpackStream({
+            devtool: "source-map",
+            module: {
+                loaders: [{
+                     test: /\.jsx?$/,
+                     exclude: /(node_modules|bower_components)/,
+                     loader: "babel",
+                     query: {
+                         presets: ["react"]
+                     }
+                }]
+            },
+            plugins: [
+                new webpack.optimize.UglifyJsPlugin({
+                    sourceMap: true,
+                    mangle: true,
+                    compress: {
+                        warnings: false
+                    }
+                }),
+                new webpack.optimize.CommonsChunkPlugin("common.js")
+            ]
+        }))
+        .pipe(gulp.dest("static/dist"));
 
 });
-
-gulp.task("default", ["build"]);

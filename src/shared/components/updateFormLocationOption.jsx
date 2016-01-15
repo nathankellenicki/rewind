@@ -1,5 +1,5 @@
 // Load dependencies
-var React = require("react/addons");
+var React = require("react");
 
 // Load constants
 var UpdateFormConstants = require("../constants/updateForm");

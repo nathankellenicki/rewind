@@ -1,9 +1,9 @@
 // Load dependencies
-var React = require("react/addons");
+var ReactDOM = require("react-dom"),
+    React = require("react");
 
 // Load React components
 var AppComponent = require("../shared/components/app.jsx");
-
 
 // Exports
 var Router = module.exports = Backbone.Router.extend({
@@ -14,7 +14,7 @@ var Router = module.exports = Backbone.Router.extend({
 
     setFilter: function (params) {
 
-        React.render(
+        ReactDOM.render(
             <AppComponent />,
             $("#app").get(0)
         );

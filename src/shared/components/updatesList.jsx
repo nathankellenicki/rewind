@@ -1,5 +1,6 @@
 // Load dependencies
-var React = require("react/addons");
+var React = require("react"),
+    ReactCSSTransitionGroup = require("react-addons-css-transition-group");
 
 // Load React compoents
 var UpdateComponent = require("./update.jsx");
@@ -33,9 +34,9 @@ var checkUpdateFormat = function (update) {
 
 
 // Setup vars
-var TransitionGroupContainer = React.addons.CSSTransitionGroup,
-    syncTimer = null,
-    fetchInterval = 10000;
+var TransitionGroupContainer = ReactCSSTransitionGroup,
+    syncTimer = null;
+    //fetchInterval = 10000;
 
 
 // Exports
@@ -99,7 +100,7 @@ var UpdatesListComponent = module.exports = React.createClass({
 
         return (
             <div className="updates">
-                <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading">
+                <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
                     {updateNodes}
                 </TransitionGroupContainer>
                 <div className="paging">

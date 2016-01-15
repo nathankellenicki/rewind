@@ -1,8 +1,9 @@
 "use strict";
 
 // Intercept .jsx files to compile JSX with Babel
-require("babel/register")({
-    extensions: [".jsx"]
+require("babel-core/register")({
+    extensions: [".jsx"],
+    presets: ["react"]
 });
 
 // Include dependencies

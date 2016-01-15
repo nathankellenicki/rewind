@@ -1,5 +1,6 @@
 // Load dependencies
-var React = require("react/addons");
+var ReactDOM = require("react-dom"),
+    React = require("react");
 
 // Load router
 var Router = require("./router");
@@ -17,7 +18,7 @@ $(document).ready(function () {
         pushState: true
     });
 
-    React.render(
+    ReactDOM.render(
         <HeaderComponent />,
         $("#main_header").get(0)
     );

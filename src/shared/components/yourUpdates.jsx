@@ -1,5 +1,5 @@
 // Load dependencies
-var React = require("react/addons");
+var React = require("react");
 
 // Load React components
 var UpdateFormComponent = require("./updateForm.jsx"),

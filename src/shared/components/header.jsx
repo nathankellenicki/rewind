@@ -1,5 +1,5 @@
 // Load dependencies
-var React = require("react/addons");
+var React = require("react");
 
 // Load actions
 var AuthActions = require("../../client/actions/auth");

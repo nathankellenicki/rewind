@@ -1,5 +1,5 @@
 // Load dependencies
-var React = require("react/addons");
+var React = require("react");
 
 // Load actions
 var UpdateActions = require("../../client/actions/update");
@@ -93,7 +93,7 @@ var UpdateComponent = module.exports = React.createClass({
         AuthStore.addEventListener(AuthConstants.Events.SIGN_OUT_EVENT, this._onSignInOutSuccess);
 
         // We force an update every so often in order to keep displayed date/times relatively up to date
-        this.renderTimer = setInterval(function () {
+        renderTimer = setInterval(function () {
             ref.forceUpdate.call(ref);
         }, renderInterval);
 
@@ -104,7 +104,7 @@ var UpdateComponent = module.exports = React.createClass({
         AuthStore.removeEventListener(AuthConstants.Events.SIGN_IN_SUCCESS_EVENT, this._onSignInOutSuccess);
         AuthStore.removeEventListener(AuthConstants.Events.SIGN_OUT_EVENT, this._onSignInOutSuccess);
 
-        clearInterval(this.renderTimer);
+        clearInterval(renderTimer);
 
     },
 
