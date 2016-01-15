@@ -10,7 +10,7 @@ To see what Rewind looks like in it's current state, visit [Nathan Kunicki's Rew
 
 ## Installation
 
-Install Node.js v0.12.0 or above (Take a look at [nvm](https://github.com/creationix/nvm) for easy management of multiple versions of Node.js).
+Install Node.js v4.2.4 or above (Take a look at [nvm](https://github.com/creationix/nvm) for easy management of multiple versions of Node.js).
 
 ### With Postgres as a datastore (For running in production)
 
@@ -23,7 +23,6 @@ Install Node.js v0.12.0 or above (Take a look at [nvm](https://github.com/creati
 
 1. Clone the repository
 2. npm install
-3. npm install sqlite3 (Required as sqlite3 must be installed outside of the normal install process)
 4. (Optional) npm install gulp -g (For compiling the client-side Javascript)
 5. npm start
 
