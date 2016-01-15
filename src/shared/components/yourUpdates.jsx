@@ -71,4 +71,5 @@ var YourUpdatesComponent = module.exports = React.createClass({
             </div>
         );
     }
+
 });

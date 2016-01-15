@@ -65,13 +65,14 @@ var UpdatesListComponent = module.exports = React.createClass({
     },
 
     componentDidMount: function () {
-        UpdatesStore.addChangeListener(this._onChange);
 
+        UpdatesStore.addChangeListener(this._onChange);
         UpdateActions.sync();
 
         //syncTimer = setInterval(function () {
         //    UpdateActions.sync();
         //}, fetchInterval);
+
     },
 
     componentWillUnmount: function () {
