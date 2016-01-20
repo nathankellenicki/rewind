@@ -60,7 +60,7 @@ var isJWTExpired = function (token) {
         complete: true
     });
 
-    return (completeDecoded.exp <= +((new Date()) / 1000));
+    return (completeDecoded.payload.exp <= +((new Date()) / 1000));
 
 };
 
