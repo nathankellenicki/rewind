@@ -34,7 +34,7 @@ var checkUpdateFormat = function (update) {
 
 
 // Setup vars
-var TransitionGroupContainer = ReactCSSTransitionGroup,
+var TransitionGroupContainer = ReactCSSTransitionGroup;
     syncTimer = null;
     //fetchInterval = 10000;
 
@@ -67,7 +67,6 @@ var UpdatesListComponent = module.exports = React.createClass({
     componentDidMount: function () {
 
         UpdatesStore.addChangeListener(this._onChange);
-        UpdateActions.sync();
 
         //syncTimer = setInterval(function () {
         //    UpdateActions.sync();

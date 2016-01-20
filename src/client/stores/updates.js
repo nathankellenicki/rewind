@@ -39,8 +39,8 @@ var UpdatesCollection = Backbone.Collection.extend({
 });
 
 
-// Create the initial collection
-var updatesCollection = new UpdatesCollection();
+// Create the initial collection with the bootstrapped data from the embedded script tag
+var updatesCollection = new UpdatesCollection(initialUpdates);
 
 
 // Define the store EventEmitter object
@@ -102,7 +102,7 @@ var destroy = function (id) {
 // Change URL of store (ie. Your updates, timeline, etc.)
 var changeURL = function (url) {
     currentPage = 0;
-    updatesCollection.set([]);
+    updatesCollection.set(initialUpdates);
     updatesCollection.url = url;
 };
 
@@ -166,7 +166,6 @@ AppDispatcher.register(function (action) {
 
             changeURL(action.url);
             break;
-
 
         case UpdateConstants.Actions.SYNC:
 

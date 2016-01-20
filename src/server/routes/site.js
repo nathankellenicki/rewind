@@ -19,7 +19,8 @@ var UpdatesController = require("../controllers/updates"),
     updatesController = new UpdatesController();
 
 // Load views
-var updatesView = require("../views/updatesBackboneCollectionMock");
+var updatesView = require("../views/updatesBackboneCollectionMock"),
+    cleanUpdatesView = require("../views/updates");
 
 // Setup routes
 var router = module.exports = express.Router();
@@ -30,6 +31,10 @@ router.get("/", function (req, res, next) {
 
     updatesController.getRecentUpdates(startPoint).then(function (updates) {
 
+        var initialUpdates = cleanUpdatesView({
+            updates: updates
+        });
+
         var renderedHeaderMarkup = React.renderToString(HeaderComponent()),
             renderedUpdateMarkup = React.renderToString(YourUpdatesComponent({
             url: "/api/updates",
@@ -39,6 +44,7 @@ router.get("/", function (req, res, next) {
         }));
 
         res.status(200).render("index", {
+            initialUpdates: JSON.stringify(initialUpdates),
             serverRenderedHeaderComponent: renderedHeaderMarkup,
             serverRenderedYourUpdatesComponent: renderedUpdateMarkup
         });
@@ -46,6 +52,8 @@ router.get("/", function (req, res, next) {
         return next;
 
     }).catch(function (err) {
+
+        console.log(err);
 
         res.status(500).send(err);
         return next;
