@@ -6,7 +6,7 @@ var UpdateConstants = require("../constants/update");
 
 
 // Exports
-var UpdateFormComponent = module.exports = React.createClass({
+module.exports = UpdateFormComponent = React.createClass({
 
     getInitialState: function () {
         return null;

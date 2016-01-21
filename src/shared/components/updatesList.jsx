@@ -40,7 +40,7 @@ var TransitionGroupContainer = ReactCSSTransitionGroup;
 
 
 // Exports
-var UpdatesListComponent = module.exports = React.createClass({
+module.exports = UpdatesListComponent = React.createClass({
 
     _constructState: function () {
 
@@ -80,8 +80,13 @@ var UpdatesListComponent = module.exports = React.createClass({
         syncTimer = null;
     },
 
+    componentWillReceiveProps: function (nextProps) {
+        UpdateActions.changeURL(nextProps.url);
+        return this._constructState();
+    },
+
     getInitialState: function () {
-        UpdateActions.changeURL(this.props.endpoint);
+        UpdateActions.changeURL(this.props.url);
         return this._constructState();
     },
 
@@ -100,7 +105,7 @@ var UpdatesListComponent = module.exports = React.createClass({
 
         return (
             <div className="updates">
-                <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading" transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
+                <TransitionGroupContainer component="ul" className="updates_list" transitionName="fading" transitionEnterTimeout={500} transitionLeaveTimeout={500}>
                     {updateNodes}
                 </TransitionGroupContainer>
                 <div className="paging">

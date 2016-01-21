@@ -37,7 +37,7 @@ var constructOSMURL = function (currentLocation) {
 
 
 // Exports
-var UpdateFormLocationOptionComponent = module.exports = React.createClass({
+module.exports = UpdateFormLocationOptionComponent = React.createClass({
 
     _viewState: {
         locationState: UpdateFormConstants.Types.LOCATION_FETCHING,

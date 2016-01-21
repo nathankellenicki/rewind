@@ -19,7 +19,8 @@ var AuthStore = require("../../client/stores/auth");
 var CHANGE_EVENT = "change";
 
 // Initial variables
-var currentPage = 0;
+var currentPage = 0,
+    initialPageLoad = true;
 
 
 // Define the Backbone collection (Initialized below)
@@ -101,9 +102,18 @@ var destroy = function (id) {
 
 // Change URL of store (ie. Your updates, timeline, etc.)
 var changeURL = function (url) {
+
     currentPage = 0;
-    updatesCollection.set(initialUpdates);
     updatesCollection.url = url;
+
+    if (initialPageLoad) {
+        updatesCollection.set(initialUpdates);
+        initialPageLoad = false;
+    } else {
+        updatesCollection.set([]);
+        sync();
+    }
+
 };
 
 

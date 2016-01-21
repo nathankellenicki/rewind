@@ -26,13 +26,21 @@ var router = module.exports = express.Router();
 router.get("/", function (req, res, next) {
 
     var pageNumber = req.query["page"] || 0,
-        perms = [UpdateConstants.Permissions.PUBLIC];
+        perms = [UpdateConstants.Permissions.PUBLIC],
+        usernameRegEx = req.baseUrl.match(/\/.*\/(.*)\//),
+        updatesPromise;
 
     if (req.auth && req.auth.perms) {
         perms = req.auth.perms;
     }
 
-    updatesController.getRecentUpdates(pageNumber, perms).then(function (updates) {
+    if (usernameRegEx) {
+        updatesPromise = updatesController.getUpdatesByUserName(usernameRegEx[1], pageNumber, perms);
+    } else {
+        updatesPromise = updatesController.getRecentUpdates(pageNumber, perms);
+    }
+
+    updatesPromise.then(function (updates) {
 
         res.status(200).send(updatesView({
             updates: updates

@@ -17,7 +17,7 @@ if (!CommonFunctions.isRunningOnServer()) {
 
 
 // Exports
-var HeaderComponent = module.exports = React.createClass({
+module.exports = HeaderComponent = React.createClass({
 
     _constructState: function () {
 

@@ -7,7 +7,7 @@ var UpdateConstants = require("../../shared/constants/update");
 module.exports = function (sequelize, DataTypes) {
 
     // Create the model
-    var Update = sequelize.define('update', {
+    var Update = sequelize.define("update", {
         knownUserId: {
             type: DataTypes.INTEGER,
             allowNull: false

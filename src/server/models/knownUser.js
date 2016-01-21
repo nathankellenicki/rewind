@@ -4,7 +4,7 @@
 module.exports = function (sequelize, DataTypes) {
 
     // Create the model
-    var KnownUser = sequelize.define('knownUser', {
+    var KnownUser = sequelize.define("knownUser", {
         username: {
             type: DataTypes.STRING
         },

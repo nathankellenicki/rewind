@@ -13,7 +13,8 @@ var UserController = module.exports = function () {
 
     // Create associations
     LocalUser.belongsTo(KnownUser, {
-        foreignKey: "knownUserId"
+        foreignKey: "knownUserId",
+        as: "KnownUser"
     });
 
     return {

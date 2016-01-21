@@ -6,10 +6,11 @@ var YourUpdatesComponent = require("./yourUpdates.jsx");
 
 
 // Exports
-var AppComponent = module.exports = React.createClass({
+module.exports = AppComponent = React.createClass({
     render: function () {
+
         return (
-            <YourUpdatesComponent url="/api/updates" />
+            <YourUpdatesComponent url={this.props.updatesUrl || "/api/updates"} />
         );
     }
 });

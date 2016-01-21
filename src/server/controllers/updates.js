@@ -42,6 +42,35 @@ module.exports = function () {
 
         },
 
+        getUpdatesByUserName: function (userName, pageNumber, types) {
+
+            pageNumber = pageNumber || 0;
+
+            return new Promise(function (resolve, reject) {
+
+                UpdateModel.findAll({
+                    order: "timestamp DESC",
+                    where: {
+                        visibility: types || [UpdateConstants.Permissions.PUBLIC],
+                    },
+                    limit: PAGE_SIZE,
+                    offset: (pageNumber * PAGE_SIZE),
+                    include: [{
+                        model: KnownUser,
+                        where: {
+                            username: userName
+                        }
+                    }]
+                }).then(function (updates) {
+                    resolve(updates);
+                }).catch(function (err) {
+                    reject(err);
+                });
+
+            });
+
+        },
+
         getUpdate: function (id) {
 
             return new Promise(function (resolve, reject) {
@@ -52,6 +81,8 @@ module.exports = function () {
                     }
                 }).then(function (update) {
                     resolve(update);
+                }).catch(function (err) {
+                    reject(err);
                 });
 
             });
@@ -71,6 +102,8 @@ module.exports = function () {
 
                 UpdateModel.create(update).then(function (result) {
                     resolve(result);
+                }).catch(function (err) {
+                    reject(err);
                 });
 
             });
@@ -86,6 +119,8 @@ module.exports = function () {
                     }
                 }).then(function () {
                     resolve();
+                }).catch(function (err) {
+                    reject(err);
                 });
 
             });

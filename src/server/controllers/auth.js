@@ -42,7 +42,7 @@ module.exports = function () {
             "url": url,
             "perms": permissions
         }, config.jwt_salt, {
-            expiresInSeconds: (24 * 60 * 60) // 24 hours
+            expiresIn: (24 * 60 * 60) // 24 hours
         });
 
     };

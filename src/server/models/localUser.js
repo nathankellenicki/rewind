@@ -4,7 +4,7 @@
 module.exports = function (sequelize, DataTypes) {
 
     // Create the model
-    var LocalUser = sequelize.define('localUser', {
+    var LocalUser = sequelize.define("localUser", {
         knownUserId: {
             type: DataTypes.INTEGER
         },

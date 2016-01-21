@@ -50,7 +50,7 @@ var wrapDangerousHTML = function (htmlStr) {
 
 
 // Exports
-var UpdateComponent = module.exports = React.createClass({
+module.exports = UpdateComponent = React.createClass({
 
     _constructState: function () {
 
@@ -76,10 +76,8 @@ var UpdateComponent = module.exports = React.createClass({
     },
 
     _handleDelete: function (e) {
-
         e.preventDefault();
         UpdateActions.destroy(this.props.id);
-
     },
 
     componentDidMount: function () {
@@ -91,7 +89,13 @@ var UpdateComponent = module.exports = React.createClass({
 
         // We force an update every so often in order to keep displayed date/times relatively up to date
         renderTimer = setInterval(function () {
-            ref.forceUpdate.call(ref);
+
+            if (ref.isMounted()) {
+                ref.forceUpdate.call(ref);
+            } else {
+                clearInterval(renderTimer);
+            }
+
         }, renderInterval);
 
     },

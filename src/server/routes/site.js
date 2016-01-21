@@ -26,6 +26,7 @@ var updatesView = require("../views/updatesBackboneCollectionMock"),
 // Setup routes
 var router = module.exports = express.Router();
 
+
 router.get("/", function (req, res, next) {
 
     var startPoint = 0;
@@ -38,11 +39,11 @@ router.get("/", function (req, res, next) {
 
         var renderedHeaderMarkup = ReactDOM.renderToString(HeaderComponent()),
             renderedUpdateMarkup = ReactDOM.renderToString(YourUpdatesComponent({
-            url: "/api/updates",
-            serverRenderedUpdates: updatesView({
-                updates: updates
-            })
-        }));
+                url: "/api/updates",
+                serverRenderedUpdates: updatesView({
+                    updates: updates
+                })
+            }));
 
         res.status(200).render("index", {
             initialUpdates: JSON.stringify(initialUpdates),
@@ -62,5 +63,44 @@ router.get("/", function (req, res, next) {
     });
 
 });
+
+
+router.get("/:user", function (req, res, next) {
+
+    var startPoint = 0;
+
+    updatesController.getUpdatesByUserName(req.params["user"], startPoint).then(function (updates) {
+
+        var initialUpdates = cleanUpdatesView({
+            updates: updates
+        });
+
+        var renderedHeaderMarkup = ReactDOM.renderToString(HeaderComponent()),
+            renderedUpdateMarkup = ReactDOM.renderToString(YourUpdatesComponent({
+                url: "/api/" + req.params["user"] + "/updates",
+                serverRenderedUpdates: updatesView({
+                    updates: updates
+                })
+            }));
+
+        res.status(200).render("index", {
+            initialUpdates: JSON.stringify(initialUpdates),
+            serverRenderedHeaderComponent: renderedHeaderMarkup,
+            serverRenderedYourUpdatesComponent: renderedUpdateMarkup
+        });
+
+        return next;
+
+    }).catch(function (err) {
+
+        console.log(err);
+
+        res.status(500).send(err);
+        return next;
+
+    });
+
+});
+
 
 router.use("/static", express.static("static")); // Static files

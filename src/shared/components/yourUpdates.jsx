@@ -18,10 +18,10 @@ if (!CommonFunctions.isRunningOnServer()) {
 
 
 // Define the server endpoint to hit for "Your Updates
-var endpoint = "/api/updates";
+var url = "/api/updates";
 
 // Exports
-var YourUpdatesComponent = module.exports = React.createClass({
+module.exports = YourUpdatesComponent = React.createClass({
 
     _constructState: function () {
 
@@ -67,7 +67,7 @@ var YourUpdatesComponent = module.exports = React.createClass({
         return (
             <div className="my_updates">
                 {updateForm}
-                <UpdatesListComponent endpoint={endpoint} serverRenderedUpdates={this.props.serverRenderedUpdates} />
+                <UpdatesListComponent url={this.props.url || url} serverRenderedUpdates={this.props.serverRenderedUpdates} />
             </div>
         );
     }

@@ -1,5 +1,6 @@
 // Load dependencies
-var React = require("react");
+var ReactDOM = require("react-dom"),
+    React = require("react");
 
 // Load actions
 var UpdateActions = require("../../client/actions/update");
@@ -31,7 +32,7 @@ var visibilityTypeMapping = {
 
 
 // Exports
-var UpdateFormComponent = module.exports = React.createClass({
+module.exports = UpdateFormComponent = React.createClass({
 
     _viewState: {
         options: [],
@@ -64,7 +65,7 @@ var UpdateFormComponent = module.exports = React.createClass({
     handleSubmit: function (e) {
 
         e.preventDefault();
-        var text = React.findDOMNode(this.refs.text).value.trim(),
+        var text = ReactDOM.findDOMNode(this.refs.text).value.trim(),
             visibility = this.state.visibility;
 
         if (!text) {
@@ -74,7 +75,7 @@ var UpdateFormComponent = module.exports = React.createClass({
         UpdateActions.create(text, visibility);
 
         // Reset everything
-        React.findDOMNode(this.refs.text).value = "";
+        ReactDOM.findDOMNode(this.refs.text).value = "";
         this._viewState.charCount = 0;
         this._viewState.visibility = UpdateContants.Permissions.PUBLIC;
         this._viewState.options = [];
@@ -89,7 +90,7 @@ var UpdateFormComponent = module.exports = React.createClass({
 
     handleCharChange: function (e) {
         e.preventDefault();
-        this._viewState.charCount = React.findDOMNode(this.refs.text).value.length;
+        this._viewState.charCount = ReactDOM.findDOMNode(this.refs.text).value.length;
         this.setState(this._viewState);
     },
 
