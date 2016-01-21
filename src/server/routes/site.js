@@ -7,7 +7,8 @@ require("babel-core/register")({
 });
 
 // Include dependencies
-var React = require("react"),
+var ReactDOM = require("react-dom/server"),
+    React = require("react"),
     express = require("express");
 
 // Load React components (As factories)
@@ -35,8 +36,8 @@ router.get("/", function (req, res, next) {
             updates: updates
         });
 
-        var renderedHeaderMarkup = React.renderToString(HeaderComponent()),
-            renderedUpdateMarkup = React.renderToString(YourUpdatesComponent({
+        var renderedHeaderMarkup = ReactDOM.renderToString(HeaderComponent()),
+            renderedUpdateMarkup = ReactDOM.renderToString(YourUpdatesComponent({
             url: "/api/updates",
             serverRenderedUpdates: updatesView({
                 updates: updates
